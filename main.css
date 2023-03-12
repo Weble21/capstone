@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+
+* {
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+.header {
+    border-bottom: solid 3px blueviolet;
+}
+
+.upperMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0;
+    height: 12vh;
+
+}
+
+.upperMenuInside {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#headerLogo {
+    height: 7vh;
+}
+
+#headerLogin {
+    width: 2em;
+}
+
+#headerMenu {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    font-size: 1.3em;
+}
+
+#headerMenu a {
+    padding-right: 15px;
+    color: blueviolet;
+}
+
+#headerMenu a:link {
+    color: lightcoral;
+    text-decoration: none;
+}
+
+#headerMenu a:visited {
+    color: blueviolet;
+    text-decoration: none;
+}
+
+#headerMenu a:hover {
+    color: lightcoral;
+    text-decoration: none;
+}
+
+#headerMenu a:active {
+    color: green;
+    text-decoration: none;
+}
+
+.carousel-item {
+    width: 80%;
+    display: block;
+    margin: auto;
+    height: 70vh;
+    object-fit: cover;
+}

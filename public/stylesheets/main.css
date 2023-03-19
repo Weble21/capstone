@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+
+* {
+    font-family: 'Black Han Sans', sans-serif;
+}
+
+.header {
+    border-bottom: solid 2px #2b2d42;
+}
+
+.upperMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0;
+    height: 12vh;
+}
+
+.upperMenu a {
+    color: #2b2d42;
+    text-decoration: none;
+}
+
+.upperMenu a:hover {
+    color: #000000;
+    text-decoration: none;
+}
+
+.upperMenuInside {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#headerLogo {
+    height: 7vh;
+}
+
+#headerLogin {
+    width: 2em;
+}
+
+#headerMenu {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    font-size: 1.3em;
+}
+
+#headerMenu a:link {
+    color: lightcoral;
+    text-decoration: none;
+}
+
+#headerMenu a:visited {
+    color: #2b2d42;
+    text-decoration: none;
+}
+
+#headerMenu a:hover {
+    color: #ef233c;
+    text-decoration: none;
+}
+
+#headerMenu a:active {
+    color: #d90429;
+    text-decoration: none;
+}
+
+section:nth-of-type(1) {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background-color: white;
+    height: 40vh;
+}
+
+section:nth-of-type(1)>div img {
+    width: 35px;
+}
+
+.fairPlay {
+    margin: 0 auto;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 4.0em;
+    color: #0e7c7b;
+}
+
+.fairPlay+p {
+    text-align: center;
+    font-size: 1.0em;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #17bebb;
+    font-weight: bold;
+}
+
+section:nth-of-type(2) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 10vh;
+    background-color: #edf2f4;
+    margin: 0 auto;
+}
+
+.gallery {
+    display: block;
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    transform: translate(-12%, -11%);
+}
+
+.bannerImage {
+    object-fit: cover;
+    border-radius: 50px;
+    height: 45vh;
+}
+
+.weather {
+    display: flex;
+    font-size: 21px;
+    width: 25%;
+    height: 30vh;
+    background-color: #abbad4;
+    padding: 0;
+    border-radius: 10px;
+    transform: translate(-37%, 10%);
+}
+
+.firstText {
+    font-size: 1.4em;
+    padding: 0;
+    text-align: center;
+    align-self: center;
+}
+
+.secondText {
+    text-align: left;
+    font-size: 0.8em;
+    align-self: center;
+
+}
+
+@media (max-width: 1050px) {
+    .firstText {
+        font-size: 1.5em;
+    }
+
+    .secondText {
+        font-size: 0.6em;
+    }
+}
+
+@media (max-width: 770px) {
+    .firstText {
+        font-size: 0.8em;
+    }
+
+    .secondText {
+        font-size: 0.4em;
+    }
+}
+
+@media (min-width: 1600px) {
+    .firstText {
+        font-size: 2.3em;
+    }
+
+    .secondText {
+        font-size: 1.2em;
+    }
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    background-color: #2b2d42;
+    color: white;
+    height: 25vh;
+}
+
+footer div {
+    text-align: left;
+    border-radius: 10px;
+    font-size: 0.7em;
+    font-family: 'Noto Sans KR', sans-serif;
+    height: 70%;
+    width: 90%;
+}

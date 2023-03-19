@@ -1,0 +1,106 @@
+<% layout('components/boilerplate.ejs') -%>
+    <section>
+        <div class="fairPlay">fair <img src="pictures/fair-play.png" alt=""> play</div>
+        <p>FairPlay는 스포츠맨십의 가치를 중요하게 생각하며, 모든 사용자들이 공정한 경기를 즐길 수 있도록 최선을 다하고 있습니다.<br>
+            게임을 존중하고, 상대를 존중하며, 자신을 존중하세요.<br>
+            모두와 즐거운 경기를 펼치시길 바랍니다!</p>
+    </section>
+    <section id="ad">
+        <div class="gallery">
+            <div id="carouselControls" class="gallery_body carousel carousel-dark slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item">
+                        <img src="pictures/futsal.jpg" class="bannerImage d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="pictures/baseball.jpg" class="bannerImage d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item active">
+                        <img src="pictures/basketball.jpg" class="bannerImage d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <div class="weather row pt-3">
+            <div class="col-md-6 firstText">
+                <div class="current_temp col"></div>
+                <div class="weather_description col"></div>
+                <div class="city col"></div>
+            </div>
+            <div class="col-md-6 secondText">
+                <div class="temp_min col"></div>
+                <div class="temp_max col"></div>
+                <div class="humidity col"></div>
+                <div class="wind col"></div>
+                <div class="cloud col"></div>
+            </div>
+            <script>
+                var weatherIcon = {
+                    '01': 'fas fa-sun',
+                    '02': 'fas fa-cloud-sun',
+                    '03': 'fas fa-cloud',
+                    '04': 'fas fa-cloud-meatball',
+                    '09': 'fas fa-cloud-sun-rain',
+                    '10': 'fas fa-cloud-showers-heavy',
+                    '11': 'fas fa-poo-storm',
+                    '13': 'far fa-snowflake',
+                    '50': 'fas fa-smog'
+                };
+
+                // 날씨 api - 서울
+                var apiURI = "http://api.openweathermap.org/data/2.5/weather?q=" + 'seoul' + "&appid=" + "9eca4cc6427c4042d2126324e3050e7c";
+                $.ajax({
+                    url: apiURI,
+                    dataType: "json",
+                    type: "GET",
+                    async: "false",
+                    success: function (resp) {
+
+                        var $Icon = (resp.weather[0].icon).substr(0, 2);
+                        var $weather_description = resp.weather[0].main;
+                        var $Temp = Math.floor(resp.main.temp - 273.15) + 'º';
+                        var $humidity = '습도&nbsp;&nbsp;&nbsp;&nbsp;' + resp.main.humidity + ' %';
+                        var $wind = '바람&nbsp;&nbsp;&nbsp;&nbsp;' + resp.wind.speed + ' m/s';
+                        var $city = '서울';
+                        var $cloud = '구름&nbsp;&nbsp;&nbsp;&nbsp;' + resp.clouds.all + "%";
+                        var $temp_min = '최저 온도&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(resp.main.temp_min - 273.15) + 'º';
+                        var $temp_max = '최고 온도&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(resp.main.temp_max - 273.15) + 'º';
+
+
+                        $('.weather_icon').append('<i class="' + weatherIcon[$Icon] + ' fa-5x" style="height : 150px; width : 150px;"></i>');
+                        $('.weather_description').prepend($weather_description);
+                        $('.current_temp').prepend($Temp);
+                        $('.humidity').prepend($humidity);
+                        $('.wind').prepend($wind);
+                        $('.city').append($city);
+                        $('.cloud').append($cloud);
+                        $('.temp_min').append($temp_min);
+                        $('.temp_max').append($temp_max);
+                    }
+                })
+            </script>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="m-5">실시간 경기⏳</h2>
+
+    </section>

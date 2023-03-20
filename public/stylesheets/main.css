@@ -60,7 +60,7 @@
 }
 
 #headerMenu a:visited {
-    color: #2b2d42;
+    color: lightcoral;
     text-decoration: none;
 }
 
@@ -178,6 +178,51 @@ section:nth-of-type(2) {
     .secondText {
         font-size: 1.2em;
     }
+}
+
+.table {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.table>tbody:hover {
+    cursor: pointer;
+}
+
+.table>thead>tr>th,
+.table>thead>tr>td {
+    font-weight: bolder;
+    color: #000000;
+}
+
+th,
+td {
+    height: 10vh;
+    align-self: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: navy;
+    font-weight: lighter;
+}
+
+
+.applyButton {
+    border-radius: 17px;
+    background: none;
+    color: #ffa260;
+    border: 2px solid;
+    padding: 0.3em 1.2em;
+    font-size: 0.9em;
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+
+.applyButton:hover {
+    border-color: #ff7143;
+    color: white;
+    background-color: #ff7143;
+    /* offset-x | offset-y | blur-radius | spread-redius | color */
+    box-shadow: 0em 0.3em 0.3em -0.1em #ff5200;
+    transform: translateY(-0.1em);
+    cursor: pointer;
 }
 
 footer {

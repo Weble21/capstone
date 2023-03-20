@@ -39,7 +39,7 @@
                 </button>
             </div>
         </div>
-        <div class="weather row pt-3">
+        <div class="weather row">
             <div class="col-md-6 firstText">
                 <div class="current_temp col"></div>
                 <div class="weather_description col"></div>
@@ -73,7 +73,6 @@
                     type: "GET",
                     async: "false",
                     success: function (resp) {
-
                         var $Icon = (resp.weather[0].icon).substr(0, 2);
                         var $weather_description = resp.weather[0].main;
                         var $Temp = Math.floor(resp.main.temp - 273.15) + 'º';
@@ -84,8 +83,7 @@
                         var $temp_min = '최저 온도&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(resp.main.temp_min - 273.15) + 'º';
                         var $temp_max = '최고 온도&nbsp;&nbsp;&nbsp;&nbsp;' + Math.floor(resp.main.temp_max - 273.15) + 'º';
 
-
-                        $('.weather_icon').append('<i class="' + weatherIcon[$Icon] + ' fa-5x" style="height : 150px; width : 150px;"></i>');
+                        $('.weather_icon').append(`<i class="` + weatherIcon[$Icon] + ` fa-5x" style="height : 150px; width : 150px;"></i>`);
                         $('.weather_description').prepend($weather_description);
                         $('.current_temp').prepend($Temp);
                         $('.humidity').prepend($humidity);
@@ -102,5 +100,52 @@
 
     <section>
         <h2 class="m-5">실시간 경기⏳</h2>
-
+        <table class="table text-center">
+            <thead class="align-middle">
+                <tr>
+                    <th scope="row" class="col-2">종목</th>
+                    <td class="col-2">시간</td>
+                    <td class="col-6">내용</td>
+                    <td class="col-2">신청</td>
+                </tr>
+            </thead>
+            <tbody class="align-middle">
+                <tr>
+                    <th scope="row">종목</th>
+                    <td>시간</td>
+                    <td>내용</td>
+                    <td><button class="applyButton">신청하기!</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">종목</th>
+                    <td>시간</td>
+                    <td>내용</td>
+                    <td><button class="applyButton">신청하기!</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">종목</th>
+                    <td>시간</td>
+                    <td>내용</td>
+                    <td><button class="applyButton">신청하기!</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">종목</th>
+                    <td>시간</td>
+                    <td>내용</td>
+                    <td><button class="applyButton">신청하기!</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">종목</th>
+                    <td>시간</td>
+                    <td>내용</td>
+                    <td><button class="applyButton">신청하기!</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">종목</th>
+                    <td>시간</td>
+                    <td>내용</td>
+                    <td><button class="applyButton">신청하기!</button></td>
+                </tr>
+            </tbody>
+        </table>
     </section>

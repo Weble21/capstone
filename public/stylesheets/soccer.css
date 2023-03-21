@@ -1,0 +1,18 @@
+.selectTier {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding-top: 7vh;
+    justify-content: space-between;
+    padding-bottom: 16px;
+}
+
+.selectTier button {
+    border-radius: 17px;
+    background: none;
+    color: grey;
+    border: 2px solid;
+    padding: 0.1em 0.4em;
+    font-size: 0.8em;
+}

@@ -16,20 +16,38 @@ app.get('/', (req, res) => {
 })
 
 app.get('/baseball', (req, res) => {
-    res.render('baseball')
+    res.render('baseball/baseball')
 })
 
 app.get('/basketball', (req, res) => {
-    res.render('basketball')
+    res.render('basketball/basketball')
 })
 
 app.get('/futsal', (req, res) => {
-    res.render('futsal')
+    res.render('futsal/futsal')
 })
 
 app.get('/soccer', (req, res) => {
-    res.render('soccer')
+    const { tier } = req.query;
+    switch (tier) {
+        case "beginner":
+            res.render("soccer/beginner", { tier });
+            break;
+        case "amateur":
+            res.render("soccer/amateur", { tier });
+            break;
+        case "elite":
+            res.render("soccer/elite", { tier });
+            break;
+        case "pro":
+            res.render("soccer/pro", { tier });
+            break;
+        default:
+            res.render("soccer/amateur", { tier });
+            break;
+    }
 })
+
 
 app.listen(port, () => {
     console.log(`Listening on Port ${port}`)

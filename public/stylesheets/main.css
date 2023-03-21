@@ -43,6 +43,7 @@
 
 #headerLogin {
     width: 2em;
+    margin-right: 15px;
 }
 
 #headerMenu {
@@ -236,6 +237,7 @@ footer {
     color: white;
     height: 25vh;
 }
+
 
 footer div {
     text-align: left;

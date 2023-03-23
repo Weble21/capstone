@@ -33,7 +33,8 @@
 
 .upperMenuInside {
     display: flex;
-    justify-content: center;
+    justify-content: right;
+    align-items: center;
     flex-wrap: wrap;
 }
 
@@ -42,8 +43,8 @@
 }
 
 #headerLogin {
-    width: 2em;
-    margin-right: 15px;
+    width: 1.5em;
+    height: 1.5em;
 }
 
 #headerMenu {
@@ -153,7 +154,7 @@ section:nth-of-type(2) {
 
 @media (max-width: 1050px) {
     .firstText {
-        font-size: 1.5em;
+        font-size: 1.4em;
     }
 
     .secondText {
@@ -161,13 +162,15 @@ section:nth-of-type(2) {
     }
 }
 
-@media (max-width: 770px) {
+@media (max-width: 850px) {
     .firstText {
-        font-size: 0.8em;
+        font-size: 1.4em;
+        text-align: center;
+        width: 100%;
     }
 
     .secondText {
-        font-size: 0.4em;
+        display: none;
     }
 }
 
@@ -235,7 +238,8 @@ footer {
     width: 100%;
     background-color: #2b2d42;
     color: white;
-    height: 25vh;
+    height: 30vh;
+    padding: 10px;
 }
 
 

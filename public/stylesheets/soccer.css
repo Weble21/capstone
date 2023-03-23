@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
 .selectTier {
     display: flex;
     width: 90%;
@@ -8,11 +10,46 @@
     padding-bottom: 16px;
 }
 
-.selectTier button {
+.selectTier>button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 17px;
     background: none;
-    color: grey;
-    border: 2px solid;
+    font-family: 'Jua', sans-serif;
+    color: #023047;
+    border: 2px solid #023047;
     padding: 0.1em 0.4em;
+    padding-top: 0.2em;
+    margin: 0;
     font-size: 0.8em;
+    text-align: justify;
+}
+
+.selectTier>button:hover {
+    background-color: #023047;
+    border-color: #023047;
+}
+
+.selectTier a {
+    font-family: 'Jua', sans-serif;
+    text-decoration: none;
+    color: #023047;
+}
+
+.selectTier a button:hover {
+    text-decoration: none;
+    color: #ffc300;
+    background-color: white;
+}
+
+.tierClass {
+    transform: translate(5%, 42px);
+    font-size: 1.2em;
+}
+
+.tierClass>img {
+    width: 1.0em;
+    height: 1.0em;
+    transform: translateY(-2px);
 }

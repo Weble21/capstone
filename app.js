@@ -48,7 +48,6 @@ app.get('/soccer', (req, res) => {
     }
 })
 
-
 app.listen(port, () => {
     console.log(`Listening on Port ${port}`)
 }) 

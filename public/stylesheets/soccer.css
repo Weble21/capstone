@@ -10,6 +10,12 @@
     padding-bottom: 16px;
 }
 
+.selectTier>h2>i {
+    font-size: 0.7em;
+    vertical-align: middle;
+    color: #114b5f;
+}
+
 .selectTier>button {
     display: flex;
     justify-content: center;

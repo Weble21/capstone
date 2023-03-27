@@ -56,13 +56,27 @@
     font-size: 1.3em;
 }
 
+@media (max-width: 500px) {
+    #headerMenu {
+        font-size: 0.95em;
+    }
+
+    #headerLogo {
+        height: 2vh;
+    }
+
+    .upperMenu>div>a {
+        font-size: 0.9em;
+    }
+}
+
 #headerMenu a:link {
-    color: lightcoral;
+    color: #ff7f7f;
     text-decoration: none;
 }
 
 #headerMenu a:visited {
-    color: lightcoral;
+    color: #ff7f7f;
     text-decoration: none;
 }
 

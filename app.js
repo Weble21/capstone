@@ -16,15 +16,66 @@ app.get('/', (req, res) => {
 })
 
 app.get('/baseball', (req, res) => {
-    res.render('baseball/baseball')
+    const { tier } = req.query;
+    switch (tier) {
+        case "beginner":
+            res.render("baseball/beginner", { tier });
+            break;
+        case "amateur":
+            res.render("baseball/amateur", { tier });
+            break;
+        case "elite":
+            res.render("baseball/elite", { tier });
+            break;
+        case "pro":
+            res.render("baseball/pro", { tier });
+            break;
+        default:
+            res.render("baseball/amateur", { tier });
+            break;
+    }
 })
 
 app.get('/basketball', (req, res) => {
-    res.render('basketball/basketball')
+    const { tier } = req.query;
+    switch (tier) {
+        case "beginner":
+            res.render("basketball/beginner", { tier });
+            break;
+        case "amateur":
+            res.render("basketball/amateur", { tier });
+            break;
+        case "elite":
+            res.render("basketball/elite", { tier });
+            break;
+        case "pro":
+            res.render("basketball/pro", { tier });
+            break;
+        default:
+            res.render("basketball/amateur", { tier });
+            break;
+    }
 })
 
 app.get('/futsal', (req, res) => {
-    res.render('futsal/futsal')
+    const { tier } = req.query;
+    switch (tier) {
+        case "beginner":
+            res.render("futsal/beginner", { tier });
+            break;
+        case "amateur":
+            res.render("futsal/amateur", { tier });
+            break;
+        case "elite":
+            res.render("futsal/elite", { tier });
+            break;
+        case "pro":
+            res.render("futsal/pro", { tier });
+            break;
+        default:
+            res.render("futsal/amateur", { tier });
+            break;
+    }
 })
 
 app.get('/soccer', (req, res) => {
@@ -47,6 +98,7 @@ app.get('/soccer', (req, res) => {
             break;
     }
 })
+
 
 app.listen(port, () => {
     console.log(`Listening on Port ${port}`)

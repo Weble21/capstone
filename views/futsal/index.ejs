@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/public/stylesheets/futsal.css">
+<!-- 비기너, 아마추어, 엘리트, 프로 -->
+<div>
+    <div class="dropdown selectTier">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <% if (tier==='beginner' ) { %>
+                비기너
+                <% } else if (tier==='amateur' ) { %>
+                    아마추어
+                    <% } else if (tier==='elite' ) { %>
+                        엘리트
+                        <% } else if (tier==='pro' ) { %>
+                            프로
+                            <% } else { %>
+                                아마추어
+                                <% } %>
+
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="/futsal?tier=beginner"><button class="dropdown-item" type="button">비기너</button></a>
+            </li>
+            <li><a href="/futsal?tier=amateur"><button class="dropdown-item" type="button">아마추어</button></a></li>
+            <li><a href="/futsal?tier=elite"><button class="dropdown-item" type="button">엘리트</button></a></li>
+            <li><a href="/futsal?tier=pro"><button class="dropdown-item" type="button">프로</button></a></li>
+
+        </ul>
+    </div>
+</div>

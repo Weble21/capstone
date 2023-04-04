@@ -1,0 +1,64 @@
+<% layout('components/boilerplate.ejs') -%>
+    <link rel="stylesheet" href="/stylesheets/baseball.css">
+
+    <div>
+        <div>
+            <br>
+            <h4 class="tierClass" style="color: #a2da12;">&nbsp;비기너 클래스<img src="\pictures\tea-leaf.png" alt=""></h4>
+            <div class="selectTier">
+                <h2>모집중인 경기<i>-baseball-</i></h2>
+                <%- include('index.ejs') %>
+            </div>
+            <table class="table text-center">
+                <thead class="align-middle">
+                    <tr>
+                        <th scope="row" class="col-2">지역</th>
+                        <td class="col-2">시간</td>
+                        <td class="col-6">내용</td>
+                        <td class="col-2">신청</td>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    <tr>
+                        <th scope="row">지역</th>
+                        <td>시간</td>
+                        <td>내용</td>
+                        <td><button class="applyButton">신청하기!</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">지역</th>
+                        <td>시간</td>
+                        <td>내용</td>
+                        <td><button class="applyButton">신청하기!</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">지역</th>
+                        <td>시간</td>
+                        <td>내용</td>
+                        <td><button class="applyButton">신청하기!</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">지역</th>
+                        <td>시간</td>
+                        <td>내용</td>
+                        <td><button class="applyButton">신청하기!</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">지역</th>
+                        <td>시간</td>
+                        <td>내용</td>
+                        <td><button class="applyButton">신청하기!</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">지역</th>
+                        <td>시간</td>
+                        <td>내용</td>
+                        <td><button class="applyButton">신청하기!</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="m-5">
+            <%- include('board.ejs') %>
+        </div>
+    </div>

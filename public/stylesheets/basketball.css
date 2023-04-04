@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+.selectTier {
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding-top: 7vh;
+    justify-content: space-between;
+    padding-bottom: 16px;
+}
+
+.selectTier>h2>i {
+    font-size: 0.7em;
+    vertical-align: middle;
+    color: #f3722c;
+}
+
+.selectTier>button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 17px;
+    background: none;
+    font-family: 'Jua', sans-serif;
+    color: #023047;
+    border: 2px solid #023047;
+    padding: 0.1em 0.4em;
+    padding-top: 0.2em;
+    margin: 0;
+    font-size: 0.8em;
+    text-align: justify;
+}
+
+.selectTier>button:hover {
+    background-color: #023047;
+    border-color: #023047;
+}
+
+.selectTier a {
+    font-family: 'Jua', sans-serif;
+    text-decoration: none;
+    color: #023047;
+}
+
+.selectTier a button:hover {
+    text-decoration: none;
+    color: #ffc300;
+    background-color: white;
+}
+
+.tierClass {
+    transform: translate(5%, 42px);
+    font-size: 1.2em;
+}
+
+.tierClass>img {
+    width: 1.0em;
+    height: 1.0em;
+    transform: translateY(-2px);
+}
+
+.board {
+    margin: auto;
+    font-family: 'Jua', sans-serif;
+}
+
+.boardHeader {
+    margin: 10px 20px;
+    color: #463f3a;
+    text-align: center;
+    font-family: 'Jua', sans-serif;
+}
+
+.boardMain {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    font-family: 'Jua', sans-serif;
+}
+
+.boardSubmit {
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+    font-family: 'Jua', sans-serif;
+}

@@ -59,3 +59,30 @@
     height: 1.0em;
     transform: translateY(-2px);
 }
+
+.board {
+    margin: auto;
+    font-family: 'Jua', sans-serif;
+}
+
+.boardHeader {
+    margin: 10px 20px;
+    color: #463f3a;
+    text-align: center;
+    font-family: 'Jua', sans-serif;
+}
+
+.boardMain {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    font-family: 'Jua', sans-serif;
+}
+
+.boardSubmit {
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+    font-family: 'Jua', sans-serif;
+}

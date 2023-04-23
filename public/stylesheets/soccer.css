@@ -86,3 +86,10 @@
     margin-top: 15px;
     font-family: 'Jua', sans-serif;
 }
+
+@media (max-width: 620px) {
+    .applybutton {
+        width: 1.0em;
+        height: 3.0em;
+    }
+}

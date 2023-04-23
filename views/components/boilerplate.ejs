@@ -24,12 +24,22 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/stylesheets/main.css">
     <%- block('head') %>
+    <script>
+        function apply() {
+            if (window.confirm("신청하시겠습니까?")) {
+                alert("신청되었습니다");
+            } else {
+                console.log("취소. 변화 없음");
+            }
+        }
+    </script>
 </head>
 
 <body>
     <%- include('header') %>
         <main><%- body %></main>
         <%- include('footer') %>
+        
 </body>
 
 </html>

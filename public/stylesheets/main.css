@@ -5,6 +5,8 @@
 
 * {
     font-family: 'Black Han Sans', sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
 .header {
@@ -143,7 +145,7 @@ section:nth-of-type(2) {
 
 .weather {
     display: flex;
-    font-size: 21px;
+    font-size: 27px;
     width: 25%;
     height: 30vh;
     background-color: #abbad4;
@@ -166,25 +168,31 @@ section:nth-of-type(2) {
 
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1250px) {
     .firstText {
         font-size: 1.4em;
     }
 
     .secondText {
-        font-size: 0.6em;
+        font-size: 0.5em;
     }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 950px) {
     .firstText {
         font-size: 1.4em;
         text-align: center;
-        width: 100%;
+        width: 90%;
     }
 
     .secondText {
         display: none;
+    }
+
+    .applyButton {
+        width: 4.2rem;
+        height: 2.0rem;
+        font-size: xx-small;
     }
 }
 
@@ -198,6 +206,11 @@ section:nth-of-type(2) {
     }
 }
 
+
+section:nth-of-type(3) {
+    margin: 10vh 0;
+    font-family: 'Courier New', Courier, monospace;
+}
 .table {
     width: 90%;
     margin: 0 auto;
@@ -229,7 +242,7 @@ td {
     color: #ffa260;
     border: 2px solid;
     padding: 0.3em 1.2em;
-    font-size: 0.9em;
+    font-size: var(16px);
     transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
 }
 
@@ -256,12 +269,10 @@ footer {
     padding: 10px;
 }
 
-
 footer div {
     text-align: left;
-    border-radius: 10px;
-    font-size: 0.7em;
+    font-size: 0.8em;
     font-family: 'Noto Sans KR', sans-serif;
-    height: 70%;
+    height: 50%;
     width: 90%;
 }

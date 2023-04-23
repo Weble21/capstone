@@ -20,42 +20,22 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    <tr>
-                        <th scope="row">지역</th>
-                        <td>시간</td>
-                        <td>내용</td>
-                        <td><button class="applyButton">신청하기!</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">지역</th>
-                        <td>시간</td>
-                        <td>내용</td>
-                        <td><button class="applyButton">신청하기!</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">지역</th>
-                        <td>시간</td>
-                        <td>내용</td>
-                        <td><button class="applyButton">신청하기!</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">지역</th>
-                        <td>시간</td>
-                        <td>내용</td>
-                        <td><button class="applyButton">신청하기!</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">지역</th>
-                        <td>시간</td>
-                        <td>내용</td>
-                        <td><button class="applyButton">신청하기!</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">지역</th>
-                        <td>시간</td>
-                        <td>내용</td>
-                        <td><button class="applyButton">신청하기!</button></td>
-                    </tr>
+                    <% for(let product of products) { %>
+                        <% if(product.tier === 'amateur') { %>
+                        <tr>
+                            <th scope="row">
+                                <%=product.area%>
+                            </th>
+                            <td>
+                                <%=product.time%>
+                            </td>
+                            <td>
+                                <%=product.contents%>
+                            </td>
+                            <td><button class="applyButton" onclick="apply()">신청하기!</button></td>
+                        </tr>
+                        <% } %>
+                    <% } %>
                 </tbody>
             </table>
         </div>

@@ -72,7 +72,47 @@ app.delete('/products/:id', async (req, res) => {
 
 app.get('/', async (req, res) => {
     const products = await Product.find({})
-    res.render('main', { products })
+    var now = new Date();
+    var currentMonth = now.getMonth() + 1;
+    var currentDate = now.getDate(); // 월은 0부터 시작하므로 1을 더해줍니다.
+    var currentTime = { month: currentMonth, date: currentDate };
+    res.render('main', { products, currentTime })
+})
+
+const tiers = ['amateur', 'pro', 'elite', 'beginner'];
+app.get('/soccer', async (req, res) => {
+    const { tier } = req.query;
+    const products = await Product.find({sport: 'soccer'});
+    switch (tier) {
+        case "beginner":
+            res.render("soccer/beginner", { tier, products });
+            break;
+        case "amateur":
+            res.render("soccer/amateur", { tier, products });
+            break;
+        case "elite":
+            res.render("soccer/elite", { tier, products });
+            break;
+        case "pro":
+            res.render("soccer/pro", { tier, products });
+            break;
+        default:
+            res.render("soccer/amateur", { tier, products });
+            break;
+    }
+})
+app.get('/soccer/new', (req, res) => {
+    res.render('soccer/new', {tiers})
+})
+app.post('/soccer', async (req, res) => {
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    res.redirect('/soccer')
+})
+app.get('/soccer/:id', async (req, res) => {
+    const { id } =req.params;
+    const product = await Product.findById(id)
+    res.render('soccer/amateur', { product })
 })
 
 app.get('/baseball', async (req, res) => {
@@ -141,27 +181,7 @@ app.get('/futsal', async (req, res) => {
     }
 })
 
-app.get('/soccer', async (req, res) => {
-    const { tier } = req.query;
-    const products = await Product.find({sport: 'soccer'});
-    switch (tier) {
-        case "beginner":
-            res.render("soccer/beginner", { tier, products });
-            break;
-        case "amateur":
-            res.render("soccer/amateur", { tier, products });
-            break;
-        case "elite":
-            res.render("soccer/elite", { tier, products });
-            break;
-        case "pro":
-            res.render("soccer/pro", { tier, products });
-            break;
-        default:
-            res.render("soccer/amateur", { tier, products });
-            break;
-    }
-})
+
 
 
 app.listen(port, () => {

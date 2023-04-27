@@ -3,11 +3,15 @@
 
     <div>
         <div>
+            <div class="subHeader">
+                <h4 class="tierClass" style="color: #02acce;">&nbsp;아마추어 클래스<img src="\pictures\laurel-wreath.png" alt="">
+                </h4>
+                <div class="selectTier">
+                    <h2>모집중인 경기<i>-soccer-</i></h2>
+                </div>
+            </div>
             <br>
-            <h4 class="tierClass" style="color: #02acce;">&nbsp;아마추어 클래스<img src="\pictures\laurel-wreath.png" alt="">
-            </h4>
-            <div class="selectTier">
-                <h2>모집중인 경기<i>-soccer-</i></h2>
+            <div class="tierDropDown">
                 <%- include('index.ejs') %>
             </div>
             <table class="table text-center">
@@ -21,25 +25,25 @@
                 </thead>
                 <tbody class="align-middle">
                     <% for(let product of products) { %>
-                        <% if(product.tier === 'amateur') { %>
-                        <tr>
-                            <th scope="row">
-                                <%=product.area%>
-                            </th>
-                            <td>
-                                <%=product.time%>
-                            </td>
-                            <td>
-                                <%=product.contents%>
-                            </td>
-                            <td><button class="applyButton" onclick="apply()">신청하기!</button></td>
-                        </tr>
-                        <% } %>
-                    <% } %>
+                        <% if(product.tier==='amateur' ) { %>
+                            <tr>
+                                <th scope="row">
+                                    <%=product.area%>
+                                </th>
+                                <td>
+                                    <%=product.time%>
+                                </td>
+                                <td>
+                                    <%=product.contents%>
+                                </td>
+                                <td><button class="applyButton" onclick="apply()">신청하기!</button></td>
+                            </tr>
+                            <% } %>
+                                <% } %>
                 </tbody>
             </table>
         </div>
-        <div class="m-5">
-            <%- include('board.ejs') %>
+        <div class="m-5 newGame">
+            <a href="/soccer/new"><button>+경기 등록하기</button></a>
         </div>
     </div>

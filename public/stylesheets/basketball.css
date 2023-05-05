@@ -13,7 +13,7 @@
 .selectTier>h2>i {
     font-size: 0.7em;
     vertical-align: middle;
-    color: #f3722c;
+    color: #ff0a54;
 }
 
 .selectTier>button {
@@ -49,6 +49,29 @@
     background-color: white;
 }
 
+.tierDropDown>button:hover {
+    background-color: #023047;
+    border-color: #023047;
+}
+
+.tierDropDown a {
+    font-family: 'Jua', sans-serif;
+    text-decoration: none;
+    color: #023047;
+}
+
+.tierDropDown a button:hover {
+    text-decoration: none;
+    color: #ffc300;
+    background-color: white;
+}
+
+.tierDropDown {
+    width: 95%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .tierClass {
     transform: translate(5%, 42px);
     font-size: 1.2em;
@@ -60,29 +83,31 @@
     transform: translateY(-2px);
 }
 
-.board {
-    margin: auto;
+.subHeader {
+    padding-top: 5vh;
+    background: linear-gradient(rgba(222, 222, 222, 0.85), rgba(255, 255, 255, 0.5)), url('/pictures/basketBanner.jpg') space;
+    background-position: center;
+    background-size: cover;
+    height: 23vh;
+    opacity: 1;
+}
+.subHeader h4.tierClass span {
     font-family: 'Jua', sans-serif;
+    font-size: 25px;
+}
+.subHeader .selectTier h2, i {
+    font-family: 'Black Han Sans', sans-serif;
 }
 
-.boardHeader {
-    margin: 10px 20px;
-    color: #463f3a;
-    text-align: center;
-    font-family: 'Jua', sans-serif;
+@media (max-width: 620px) {
+    .applybutton {
+        width: 1.0em;
+        height: 3.0em;
+    }
 }
-
-.boardMain {
+.newGame {
+    width: 92%;
     display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin: auto;
-    font-family: 'Jua', sans-serif;
-}
-
-.boardSubmit {
-    display: flex;
-    justify-content: end;
-    margin-top: 15px;
-    font-family: 'Jua', sans-serif;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }

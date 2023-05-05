@@ -1,0 +1,21 @@
+<% layout('components/boilerplate.ejs') -%>
+    <link rel="stylesheet" href="/stylesheets/register.css">
+    <h1>Login</h1>
+    <div id="registerForm">
+        <form action="/login" method="POST" class="validated-form" novalidate>
+            <label class="form-label" for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+            <label class="form-label" for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div id="submit">
+                <button class="btn btn-success">login</button>
+            </div>
+        </form>
+    </div>

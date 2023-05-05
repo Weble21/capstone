@@ -1,49 +1,53 @@
 <% layout('components/boilerplate.ejs') -%>
     <link rel="stylesheet" href="/stylesheets/soccer.css">
-
     <div>
         <div>
             <div class="subHeader">
-               <h4 class="tierClass"
-                style="color: #f9f91f; text-shadow: 1px 1px #ff0101, -1px -1px #ff0101, 1px -1px #ff0101, -1px 1px #ff0101;">
-                &nbsp;프로 클래스<img src="\pictures\actor.png" alt=""></h4>
+                <h4 class="tierClass"
+                    style="color: #f9f91f; text-shadow: 1px 1px #ff0101, -1px -1px #ff0101, 1px -1px #ff0101, -1px 1px #ff0101;">
+                    <span>&nbsp;프로 클래스</span><img src="\pictures\actor.png" alt=""></h4>
                 <div class="selectTier">
                     <h2>모집중인 경기<i>-soccer-</i></h2>
                 </div>
             </div>
             <br>
-            
             <div class="tierDropDown">
                 <%- include('index.ejs') %>
             </div>
             <table class="table text-center">
-                
                 <thead class="align-middle">
                     <tr>
-                        <th scope="row" class="col-2">지역</th>
+                        <th scope="row" class="col-1">지역</th>
                         <td class="col-2">시간</td>
                         <td class="col-6">내용</td>
+                        <td class="col-1">작성자(등급)</td>
                         <td class="col-2">신청</td>
                     </tr>
                 </thead>
                 <tbody class="align-middle">
                     <% for(let product of products) { %>
-                        <% if(product.tier === 'pro') { %>
-                        <tr>
-                            <th scope="row">
-                                <%=product.area%>
-                            </th>
-                            <td>
-                                <%=product.time%>
-                            </td>
-                            <td>
-                                <%=product.contents%>
-                            </td>
-                            <td><button class="applyButton" onclick="apply()">신청하기!</button></td>
-                        </tr>
-                        <% } %>
-                    <% } %>
+                        <% if(product.tier==='pro' ) { %>
+                            <tr>
+                                <th scope="row">
+                                    <%=product.area%>
+                                </th>
+                                <td>
+                                    <%=product.time%>
+                                </td>
+                                <td>
+                                    <%=product.contents%>
+                                </td>
+                                <td>
+                                    <%=product.username%>(<%=product.fair_tier%>)
+                                </td>
+                                <td><button class="applyButton" onclick="apply()">신청하기!</button></td>
+                            </tr>
+                            <% } %>
+                                <% } %>
                 </tbody>
             </table>
+        </div>
+        <div class="m-5 newGame">
+            <a href="new"><button>+경기 등록하기</button></a>
         </div>
     </div>

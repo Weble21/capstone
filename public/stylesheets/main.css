@@ -4,8 +4,8 @@
 
 
 * {
-    font-family: 'Black Han Sans', sans-serif;
     padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
     margin: 0;
 }
 
@@ -39,6 +39,9 @@
     align-items: center;
     flex-wrap: wrap;
 }
+#fair_paly_a span {
+    font-family: 'Black Han Sans', sans-serif;
+}
 
 #headerLogo {
     height: 7vh;
@@ -47,6 +50,10 @@
 #headerLogin {
     width: 1.5em;
     height: 1.5em;
+}
+
+#headerMenu a {
+    font-family: 'Black Han Sans', sans-serif;
 }
 
 #headerMenu {

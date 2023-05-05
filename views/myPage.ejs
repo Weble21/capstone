@@ -1,0 +1,12 @@
+<% layout('components/boilerplate.ejs') -%>
+<% if(currentUser) { %>
+    <link rel="stylesheet" href="/stylesheets/futsal.css">
+    <h1><%= currentUser.username %>의 마이페이지</h1>
+    <div>
+        <%= currentUser.username %>
+    </div>
+    <div>
+        <a href="/new">경기 등록하기</a>
+        <a href=""></a>
+    </div>
+    <% } %>

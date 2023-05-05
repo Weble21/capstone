@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const productSchema = new mongoose.Schema({
+const productSchema = new Schema({
     sport: {
         type: String,
         enum: ['baseball', 'basketball', 'soccer', 'futsal'],
@@ -25,7 +26,18 @@ const productSchema = new mongoose.Schema({
     },
     application: {
         type: Boolean,
-        default: false,
+        default: false
+    },
+    username: {
+        type: String,
+        require: true
+    },
+    fiar_tier: {
+        type: Number,
+        default: 1,
+        min: 1,
+        max: 6,
+        required: true
     }
 })
 productSchema.pre('save', function (next) {

@@ -65,8 +65,8 @@ app.get('/register', (req, res) => {
     res.render('register');
 })
 app.post('/register', async (req, res) => {
-    const { email, username, password } = req.body;
-    const user = new User({email, username});
+    const { email, username, password, phone_num } = req.body;
+    const user = new User({email, username, phone_num});
     const registeredUser = await User.register(user, password);
     req.flash('success', 'Fair Play에 오신걸 환영합니다!')
     res.redirect('/');
@@ -119,18 +119,7 @@ app.get('/soccer', async (req, res) => {
             break;
     }
 })
-app.get('/new', (req, res) => {
-    if(!req.isAuthenticated()) {
-        req.flash('error', '로그인하세요')
-        return res.redirect('/login')
-    }
-    res.render('new', {tiers})
-})
-app.post('/new', async (req, res) => {
-    const newProduct = new Product(req.body);
-    await newProduct.save();
-    res.redirect('/')
-})
+
 app.get('/soccer/:id', async (req, res) => {
     const { id } =req.params;
     const product = await Product.findById(id)
@@ -203,10 +192,35 @@ app.get('/futsal', async (req, res) => {
     }
 })
 
-app.get('/myPage', (req, res) => {
-    res.render('myPage');
+app.get('/mypage', async (req, res) => {
+    const products = await Product.find();
+    if(!req.isAuthenticated()) {
+        req.flash('error', '로그인하세요')
+        return res.redirect('/login')
+    }
+    res.render('mypage/mypage', { products });
 })
 
+app.get('/mypage/new', (req, res) => {
+    if(!req.isAuthenticated()) {
+        req.flash('error', '로그인하세요')
+        return res.redirect('/login')
+    }
+    res.render('mypage/new', { tiers })
+})
+app.post('/mypage/new', async (req, res) => {
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    req.flash('success', '등록되었습니다!')
+    res.redirect('/mypage')
+})
+
+app.delete('/mypage/:id', async (req, res) => {
+    const { id } = req.params;
+    const deletedProduct = await Product.findByIdAndDelete(id);
+    req.flash('success', '삭제되었습니다!')
+    res.redirect('/mypage');
+})
 
 app.listen(port, () => {
     console.log(`Listening on Port ${port}`)

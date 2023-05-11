@@ -31,13 +31,13 @@ label {
     margin: 0 auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    border: solid 5px #ef767a;
+    border: solid 5px #b7ef76;
     border-radius: 10px;
     font-family: 'Noto Sans KR', sans-serif;
 }
 .newBody>h1 {
     margin: 36px 0px 14px 0px;
-    color: #456990;
+    color: #2c9338;
     text-align: center;
     display: block;
 }

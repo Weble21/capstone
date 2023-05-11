@@ -9,12 +9,21 @@ const UserSchema = new Schema({
         required: [true, 'Cannot be blank'],
         unique: true
     },
-    fiar_tier: {
+    fair_tier: {
         type: Number,
         default: 1,
         min: 1,
         max: 6,
         required: true
+    },
+    phone_num: {
+        type: String,
+        required: [true, 'Cannot be blank'],
+        unique: true
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 UserSchema.plugin(passportLocalMongoose);

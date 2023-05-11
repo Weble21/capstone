@@ -32,7 +32,7 @@ const productSchema = new Schema({
         type: String,
         require: true
     },
-    fiar_tier: {
+    fair_tier: {
         type: Number,
         default: 1,
         min: 1,

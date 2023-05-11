@@ -1,0 +1,54 @@
+<% layout('components/boilerplate.ejs') -%>
+    <% if(currentUser) { %>
+        <link rel="stylesheet" href="/stylesheets/futsal.css">
+        <h1>
+            <%= currentUser.username %>의 마이페이지
+        </h1>
+        <div>
+            <h2>페어등급:
+                <%= currentUser.fair_tier %>
+            </h2>
+        </div>
+        <div>
+            <a href="/mypage/new">새로운 경기 등록하기</a>
+        </div>
+        <div>
+            <h2>등록된 경기들</h2>
+            <table class="table text-center">
+                <thead class="align-middle">
+                    <tr>
+                        <th scope="row" class="col-1">지역</th>
+                        <td class="col-2">시간</td>
+                        <td class="col-6">내용</td>
+                        <td class="col-1">티어</td>
+                        <td class="col-1">삭제</td>
+                    </tr>
+                </thead>
+                <% for(let product of products) { %>
+                    <% if(product.username===currentUser.username) { %>
+                        <tbody class="align-middle">
+                            <tr>
+                                <th scope="row">
+                                    <%=product.area%>
+                                </th>
+                                <td>
+                                    <%=product.time%>
+                                </td>
+                                <td>
+                                    <%=product.contents%>
+                                </td>
+                                <td>
+                                    <%=product.tier%>
+                                </td>
+                                <td>
+                                    <form action="/mypage/<%=product._id%>?_method=DELETE" method="POST">
+                                        <button>Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <% } %>
+                <% } %>
+            </table>
+        </div>
+        <% } %>

@@ -50,6 +50,7 @@
 #headerLogin {
     width: 1.5em;
     height: 1.5em;
+    cursor: pointer;
 }
 
 #headerMenu a {
@@ -63,6 +64,10 @@
     flex-wrap: wrap;
     padding: 0;
     font-size: 1.3em;
+}
+
+svg {
+    cursor: pointer;
 }
 
 @media (max-width: 500px) {

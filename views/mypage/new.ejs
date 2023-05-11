@@ -4,13 +4,16 @@
         body {
             background-color: white;
         }
+        .form-control {
+            width: 280%;
+        }
     </style>
 
     <body>
         <div class="newBody">
             <h1>New Game!</h1>
             <br>
-            <form action="/new" , method="POST">
+            <form action="/mypage/new" , method="POST" class="validated-form" novalidate>
                 <label for="sport">종목</label>
                 <select name="sport" id="sport">
                     <option value="soccer">soccer</option>
@@ -20,16 +23,16 @@
                 </select>
                 <br>
                 <label for="area">지역</label>
-                <input type="text" name="area" id="area" placeholder="지역을 입력하세요">
+                <input type="text" class="form-control" name="area" id="area" placeholder="지역을 입력하세요" required>
                 <br>
                 <label for="time">경기 날짜</label>
-                <input type="date" name="time" id="time" placeholder="경기 시작 시간을 입력하세요">
+                <input type="date" class="form-control" name="time" id="time" placeholder="경기 시작 시간을 입력하세요" required>
                 <br>
                 <label for="time">경기 시간</label>
-                <input type="time" name="time" id="time" placeholder="경기 시작 시간을 입력하세요">
+                <input type="time" class="form-control" name="time" id="time" placeholder="경기 시작 시간을 입력하세요" required>
                 <br>
                 <label for="contents">세부 내용</label>
-                <textarea name="contents" id="contents" cols="30" rows="10" placeholder="경기 장소 등 내용을 입력하세요"></textarea>
+                <textarea name="contents" class="form-control" id="contents" cols="30" rows="10" placeholder="경기 장소 등 내용을 입력하세요" required></textarea>
                 <br>
                 <label for="tier">경기 티어 선택</label>
                 <select name="tier" id="tier">
@@ -51,3 +54,25 @@
             </form>
         </div>
     </body>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.validated-form')
+
+            // Loop over them and prevent submission
+            Array.from(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+    

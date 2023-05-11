@@ -26,4 +26,5 @@ h1 {
     flex-wrap: wrap;
     justify-content: flex-end;
     width: 100%;
+    gap: 14px;
 }

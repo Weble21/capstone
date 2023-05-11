@@ -1,25 +1,71 @@
 <% layout('components/boilerplate.ejs') -%>
-<link rel="stylesheet" href="/stylesheets/register.css">
-<h1>선수 등록하기</h1>
-<div id="registerForm">
-    <form action="/register" method="POST" class="validated-form" novalidate>
-        <label class="form-label" for="username">Username</label>
-        <input type="text" class="form-control" id="username" name="username" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-        <label class="form-label" for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-        <label class="form-label" for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-        <div class="valid-feedback">
-            Looks good!
-        </div>
-        <div id="submit">
-            <button class="btn btn-success">Register</button>
-        </div>
-    </form>
-</div>
+    <link rel="stylesheet" href="/stylesheets/register.css">
+    <h1>선수 등록하기</h1>
+    <div id="registerForm">
+        <form action="/register" method="POST" class="validated-form" novalidate>
+            <div class="mb-3">
+                <label for="username" class="form-label">사용자 이름</label>
+                <input type="text" class="form-control" name="username" id="username" required>
+                <div class="invalid-feedback">
+                    작성 필수!
+                </div>
+                <div class="valid-feedback">
+                    좋습니다!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">이메일</label>
+                <input type="text" class="form-control" name="email" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                <div class="invalid-feedback">
+                    작성 필수!
+                </div>
+                <div class="valid-feedback">
+                    좋습니다!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">비밀번호</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+                <div class="invalid-feedback">
+                    작성 필수!
+                </div>
+                <div class="valid-feedback">
+                    좋습니다!
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="phone_num" class="form-label">전화번호</label>
+                <input type="text" placeholder="010-1234-5678" class="form-control" name="phone_num" id="phone_num" required pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
+                <div class="invalid-feedback">
+                    작성 필수!
+                </div>
+                <div class="valid-feedback">
+                    좋습니다!
+                </div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.validated-form')
+
+            // Loop over them and prevent submission
+            Array.from(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>

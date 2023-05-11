@@ -9,9 +9,12 @@ form {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 45%;
+    width: 100%;
     margin: 0 auto;
 
+}
+#registerForm form div {
+    width: 100%;
 }
 h1 {
     font-family: 'Jua', sans-serif;
@@ -20,6 +23,7 @@ h1 {
     font-weight: bold;
     color: #993366;
 }
+
 #submit {
     margin: 20px 0px;
     display: flex;

@@ -1,9 +1,15 @@
+h1 {
+    font-weight: 800;
+}
 .newBody button {
     background-color: white;
     border: #1dd3b0 solid 4px;
+    margin-top: 21px;
     color: #1dd3b0;
-    padding: 5px 10px;
-    border-radius: 20px;
+    padding: -10px 10px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1em;
     transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
 }
 label {
@@ -18,6 +24,8 @@ label {
     background-color: #1dd3b0;
     box-shadow: 0em 0.2em 0.2em -0.1em #6fbeff;
     transform: translateY(-0.1em);
+    color: white;
+    font-weight: 600;
     cursor: pointer;
 }
 .newGame a:link {
@@ -55,3 +63,95 @@ label {
 .newBody form #contents {
     height: 3.0em;
 }
+
+#backTomypage a {
+    text-decoration: none;
+    color: black;
+}
+
+#backTomypage {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 10px;
+    margin: 0px;
+}
+#backTomypage form {
+    margin: 0;
+    display: inline-block;
+    width: fit-content;
+}
+
+#backTomypage .btn-warning {
+    color: white;
+    background-color: #ffd100;
+    border: solid 2px #ffd100;
+    border-radius: 15px;
+    font-size: var(16px);
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+
+#backTomypage .btn-warning:hover {
+    background-color: #ffd100;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0em 0.3em 0.3em -0.1em #fbff00;
+    transform: translateY(-0.1em);
+    cursor: pointer;
+}
+
+#backTomypage .btn-secondary {
+    color: white;
+    background-color: #8d99ae;
+    border: solid 2px #8d99ae;
+    border-radius: 15px;
+    font-size: var(16px);
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+
+#backTomypage .btn-secondary:hover {
+    background-color: #8d99ae;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0em 0.3em 0.3em -0.1em #bfc0c0;
+    transform: translateY(-0.1em);
+    cursor: pointer;
+}
+
+
+#backTomypage .btn-danger {
+    color: white;
+    background-color: #f42b03;
+    border: solid 2px #f42b03;
+    border-radius: 15px;
+    font-size: var(16px);
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+
+#backTomypage .btn-danger:hover {
+    background-color: #f42b03;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0em 0.3em 0.3em -0.1em #f40303b4;
+    transform: translateY(-0.1em);
+    cursor: pointer;
+}
+
+.submit {
+    background-color: white;
+    border: #1dd3b0 solid 4px;
+    color: #1dd3b0;
+    width: 80%;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+.submit:hover {
+    text-decoration: none;
+    color: #114b5f;
+    background-color: #1dd3b0;
+    box-shadow: 0em 0.2em 0.2em -0.1em #fbff12;
+    transform: translateY(-0.1em);
+    cursor: pointer;
+}
+

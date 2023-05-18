@@ -11,36 +11,37 @@
 
     <body>
         <div class="newBody">
-            <h1>New Game!</h1>
+            <h1>세부 정보 수정하기</h1>
             <br>
-            <form action="/mypage/new" , method="POST" class="validated-form" novalidate>
+            <form action="/mypage/<%= product._id %>?_method=PUT" , method="POST" class="validated-form" novalidate>
                 <label for="sport">종목</label>
                 <select name="sport" id="sport">
-                    <option value="soccer">soccer</option>
-                    <option value="basketball">basketball</option>
-                    <option value="futsal">futsal</option>
-                    <option value="baseball">baseball</option>
+                    <% for(let sport of sports) { %>
+                        <option value="<%=sport%>" <%= product.sport === sport ? 'selected' : ''%>>
+                            <%=sport%>
+                        </option>
+                    <% } %>
                 </select>
                 <br>
                 <label for="area">지역</label>
-                <input type="text" class="form-control" name="area" id="area" placeholder="지역을 입력하세요" required>
+                <input type="text" class="form-control" name="area" id="area" placeholder="<%= product.area%>" value="<%= product.area%>" required>
                 <br>
                 <label for="time">경기 날짜</label>
-                <input type="date" class="form-control" name="time" id="time" placeholder="경기 날짜를 입력하세요" required>
+                <input type="date" class="form-control" name="time" id="time" placeholder="<%= product.time ? product.time.toISOString().split('T')[0] : '' %>" value="<%= product.time ? product.time.toISOString().split('T')[0] : '' %>" required>
                 <br>
                 <label for="time">경기 시간</label>
-                <input type="time" class="form-control" name="time" id="time" placeholder="경기 시작 시간을 입력하세요" required>
+                <input type="time" class="form-control" name="time" id="time" placeholder="<%= product.time ? product.time.toISOString().split('T')[1].substring(0, 5) : '' %>" value="<%= product.time ? product.time.toISOString().split('T')[1].substring(0, 5) : '' %>" required>
                 <br>
                 <label for="contents">세부 내용</label>
-                <textarea name="contents" class="form-control" id="contents" cols="30" rows="10" placeholder="경기 장소 등 내용을 입력하세요" required></textarea>
+                <textarea name="contents" class="form-control" id="contents" cols="30" rows="10" placeholder="<%= product.contents%>" value="<%= product.contents%>" required></textarea>
                 <br>
                 <label for="tier">경기 티어 선택</label>
                 <select name="tier" id="tier">
                     <% for(let tier of tiers) { %>
-                        <option value="<%=tier%>">
+                        <option value="<%=tier%>" <%= product.tier === tier ? 'selected' : ''%>>
                             <%=tier%>
                         </option>
-                        <% } %>
+                    <% } %>
                 </select>
                 <br>
                 <% if(currentUser) { %>
@@ -50,8 +51,11 @@
                 <label for="fair_tier" style="display: none;">페어티어</label>
                 <input type="number" name="fair_tier" id="fair_tier" value="<%=currentUser.fair_tier%>" style="display: none;" readonly>
                 <br>
-                <button>새로운 경기 등록하기!</button>
+                <button class="submit">수정 완료</button>
             </form>
+            <div class="backTomypage">
+                <a class="btn btn-secondary" href="/mypage/<%= product._id %>">수정 취소</a>
+            </div>
         </div>
     </body>
     <script>

@@ -1,0 +1,102 @@
+<% layout('components/boilerplate.ejs') -%>
+    <link rel="stylesheet" href="/stylesheets/new.css">
+    <style>
+        body {
+            background-color: white;
+        }
+
+        .form-control {
+            width: 280%;
+        }
+    </style>
+
+    <body>
+        <div class="newBody">
+            <h1>경기 세부 정보</h1>
+            <br>
+            <form class="validated-form" novalidate>
+                <label for="sport">종목</label>
+                <select name="sport" id="sport" disabled>
+                    <% for(let sport of sports) { %>
+                        <option value="<%=sport%>" <%=product.sport===sport ? 'selected' : '' %>>
+                            <%=sport%>
+                        </option>
+                        <% } %>
+                </select>
+                <br>
+                <label for="area">지역</label>
+                <input type="text" class="form-control" name="area" id="area" placeholder="<%= product.area%>"
+                    value="<%= product.area%>" required readonly>
+                <br>
+                <label for="time">경기 날짜</label>
+                <input type="date" class="form-control" name="time" id="time"
+                    placeholder="<%= product.time ? product.time.toISOString().split('T')[0] : '' %>"
+                    value="<%= product.time ? product.time.toISOString().split('T')[0] : '' %>" required readonly>
+                <br>
+                <label for="time">경기 시간</label>
+                <input type="time" class="form-control" name="time" id="time"
+                    placeholder="<%= product.time ? product.time.toISOString().split('T')[1].substring(0, 5) : '' %>"
+                    value="<%= product.time ? product.time.toISOString().split('T')[1].substring(0, 5) : '' %>" required
+                    readonly>
+                <br>
+                <label for="contents">세부 내용</label>
+                <textarea name="contents" class="form-control" id="contents" cols="30" rows="10"
+                    placeholder="<%= product.contents%>" value="<%= product.contents%>" required readonly></textarea>
+                <br>
+                <label for="tier">경기 티어 선택</label>
+                <select name="tier" id="tier" disabled>
+                    <% for(let tier of tiers) { %>
+                        <option value="<%=tier%>" <%=product.tier===tier ? 'selected' : '' %>>
+                            <%=tier%>
+                        </option>
+                        <% } %>
+                </select>
+                <br>
+                <% if(currentUser) { %>
+                    <label for="username">사용자</label>
+                    <input type="text" name="username" id="username" value="<%= currentUser.username%>" readonly>
+                    <% } %>
+                        <label for="fair_tier" style="display: none;">페어티어</label>
+                        <input type="number" name="fair_tier" id="fair_tier" value="<%=currentUser.fair_tier%>"
+                            style="display: none;" readonly>
+                        <br>
+            </form>
+            <div id="backTomypage">
+                <a href="/mypage/<%= product._id %>/edit">
+                    <button class="btn btn-warning">
+                        수정하기
+                    </button>
+                </a>
+                <a href="/mypage">
+                    <button class="btn btn-secondary">
+                        마이페이지로 돌아가기
+                    </button>
+                </a>
+                <form action="/mypage/<%=product._id%>?_method=DELETE" method="POST"
+                    onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                    <button class="btn btn-danger">마감하기</button>
+                </form>
+            </div>
+        </div>
+    </body>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.validated-form')
+
+            // Loop over them and prevent submission
+            Array.from(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>

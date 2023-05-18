@@ -55,11 +55,11 @@
                 <% if(currentUser) { %>
                     <label for="username">사용자</label>
                     <input type="text" name="username" id="username" value="<%= currentUser.username%>" readonly>
+                    <label for="fair_tier" style="display: none;">페어티어</label>
+                    <input type="number" name="fair_tier" id="fair_tier" value="<%=currentUser.fair_tier%>"
+                        style="display: none;" readonly>
                     <% } %>
-                        <label for="fair_tier" style="display: none;">페어티어</label>
-                        <input type="number" name="fair_tier" id="fair_tier" value="<%=currentUser.fair_tier%>"
-                            style="display: none;" readonly>
-                        <br>
+                <br>
             </form>
             <div id="backTomypage">
                 <a href="/mypage/<%= product._id %>/edit">
@@ -74,8 +74,20 @@
                 </a>
                 <form action="/mypage/<%=product._id%>?_method=DELETE" method="POST"
                     onsubmit="return confirm('정말 삭제하시겠습니까?');">
-                    <button class="btn btn-danger">마감하기</button>
+                    <button class="btn btn-danger">삭제하기</button>
                 </form>
+            </div>
+        </div>
+        <div class="checkApplicant">
+            <div class="checkHeader">
+                <h2>경기 관리 및 신청자 정보</h2>
+                <form action="/products/<%= product._id %>/application" method="POST" 
+                    onsubmit="return confirm('정말 마감하시겠습니까?');">
+                    <button type="submit" class="btn btn-finish"">경기 마감하기</button>
+                </form>
+            </div>
+            <div class="applicant">
+                
             </div>
         </div>
     </body>

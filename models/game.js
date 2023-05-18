@@ -40,7 +40,8 @@ const productSchema = new Schema({
     required: true,
   },
   submittedNum: {
-    type: String,
+    type: [String], // 배열로 정의
+    default: [],
   },
 });
 productSchema.pre("save", function (next) {

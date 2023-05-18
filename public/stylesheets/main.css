@@ -229,7 +229,7 @@ section:nth-of-type(3) {
 }
 
 .table>tbody:hover {
-    cursor: pointer;
+    cursor: default;
 }
 
 .table>thead>tr>th,
@@ -256,6 +256,14 @@ td {
     padding: 0.3em 1.2em;
     font-size: var(16px);
     transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+
+.disabledButton {
+    border-radius: 17px;
+    color: #778da9;
+    border: 2px solid #acb7c3;
+    padding: 0.3em 1.2em;
+    font-size: var(16px);
 }
 
 .applyButton:hover {

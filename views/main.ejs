@@ -98,43 +98,58 @@
         </div>
     </section>
 
-    <script>
-        function apply() {
-            if (window.confirm("신청하시겠습니까?")) {
-                alert("신청되었습니다");
-            } else {
-                console.log("취소. 변화 없음");
+    <% if(currentUser) { %>
+        <script>
+            function apply() {
+                alert('신청되었습니다!');
             }
-        }
-    </script>
+        </script>
+    <% } else { %>
+        <script>
+            function apply() {
+                alert('로그인하세요!');
+            }
+        </script>
+    <% } %>
     <section>
         <h2 class="m-5">당일 진행 경기⏳</h2>
         <table class="table text-center">
             <thead class="align-middle">
                 <tr>
-                    <th scope="row" class="col-2">종목</th>
+                    <th scope="row" class="col-1">종목</th>
                     <td class="col-2">시간</td>
                     <td class="col-6">내용</td>
+                    <td class="col-1">작성자(등급)</td>                    
                     <td class="col-2">신청</td>
                 </tr>
             </thead>
             <tbody class="align-middle">
                 <% for(let product of products) { %>
-                    <% if(product.time.getMonth() + 1=== currentTime.month && product.time.getDate() === currentTime.date) { %>
+                    <% if(product.time.getMonth() + 1 === currentTime.month && product.time.getDate() === currentTime.date) { %>
                         <tr>
                             <th scope="row">
-                                <%=product.sport%>
+                                <%= product.sport %>
                             </th>
                             <td>
-                                <%=product.time%>
+                                <%= product.time %>
                             </td>
                             <td>
-                                <%=product.contents%>
+                                <%= product.contents %>
                             </td>
-                            <td><button class="applyButton" onclick="apply()">신청하기!</button></td>
+                            <td>
+                                <%= product.username %>(<%= product.fair_tier %>)
+                            </td>
+                            <td>
+                                <% if(!product.application) { %>
+                                    <button class="applyButton" onclick="apply()">신청하기!</button>
+                                <% } else {%>
+                                    <button class="disabledButton" disabled>신청 마감</button>
+                                <% } %>
+                            </td>
                         </tr>
-                        <% } %>
                     <% } %>
+                <% } %>
             </tbody>
         </table>
     </section>
+    

@@ -2,7 +2,7 @@
     <link rel="stylesheet" href="/stylesheets/soccer.css">
 
     <div>
-        <div>
+        <div style="margin-bottom: 20px;">
             <div class="subHeader">
                 <h4 class="tierClass" style="color: #a2da12; text-shadow: 1px 1px #ffffff, -1px -1px #ffffff, 1px -1px #ffffff, -1px 1px #ffffff;">
                     <span>&nbsp;비기너 클래스</span><img src="\pictures\tea-leaf.png" alt=""></h4>
@@ -40,14 +40,17 @@
                                 <td>
                                     <%=product.username%>(<%=product.fair_tier%>)
                                 </td>
-                                <td><button class="applyButton" onclick="apply()">신청하기!</button></td>
+                                <td>
+                                    <% if(!product.application) { %>
+                                        <button class="applyButton" onclick="apply()">신청하기!</button>
+                                    <% } else {%>
+                                        <button class="disabledButton" disabled>신청 마감</button>
+                                    <% } %>
+                                </td>
                             </tr>
                             <% } %>
                                 <% } %>
                 </tbody>
             </table>
-        </div>
-        <div class="m-5 newGame">
-            <a href="new"><button>+경기 등록하기</button></a>
         </div>
     </div>

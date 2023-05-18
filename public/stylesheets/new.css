@@ -1,7 +1,7 @@
 h1 {
     font-weight: 800;
 }
-.newBody button {
+.newBtn {
     background-color: white;
     border: #1dd3b0 solid 4px;
     margin-top: 21px;
@@ -18,7 +18,7 @@ label {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-.newBody button:hover {
+.newBtn:hover {
     text-decoration: none;
     color: #114b5f;
     background-color: #1dd3b0;
@@ -90,6 +90,14 @@ label {
     font-size: var(16px);
     transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
 }
+.btn-warning {
+    color: white;
+    background-color: #ffd100;
+    border: solid 2px #ffd100;
+    border-radius: 15px;
+    font-size: var(16px);
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
 
 #backTomypage .btn-warning:hover {
     background-color: #ffd100;
@@ -99,6 +107,35 @@ label {
     transform: translateY(-0.1em);
     cursor: pointer;
 }
+
+.btn-warning:hover {
+    background-color: #ffd100;
+    border-radius: 15px;
+    color: white;
+    box-shadow: 0em 0.3em 0.3em -0.1em #fbff00;
+    transform: translateY(-0.1em);
+    cursor: pointer;
+}
+
+.btn-secondary {
+    color: white;
+    background-color: #9a8f97;
+    border: solid 2px #9a8f97;
+    border-radius: 15px;
+    font-size: var(16px);
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+
+.btn-secondary:hover {
+    background-color: #9a8f97;
+    border-radius: 15px;
+    border: solid 2px #9a8f97;
+    color: white;
+    box-shadow: 0em 0.3em 0.3em -0.1em #c3baba;
+    transform: translateY(-0.1em);
+    cursor: pointer;
+}
+
 
 #backTomypage .btn-secondary {
     color: white;
@@ -155,3 +192,47 @@ label {
     cursor: pointer;
 }
 
+.update {
+    padding: 5px 20px;
+}
+
+.btnDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.btn-finish {
+    background-color: #f56a00;
+    color: #ffffff;
+    border-radius: 16px;
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+.btn-finish:hover {
+    background-color: #f56a00;
+    color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0em 0.2em 0.2em -0.1em #f44708;
+    transform: translateY(-0.1em);
+    cursor: pointer;
+}
+
+.checkApplicant {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.checkHeader {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+}
+.applicant {
+    background-color: #1dd3b0;
+    width: 90px;
+    margin: 0 auto;
+    height: 10vh;
+}

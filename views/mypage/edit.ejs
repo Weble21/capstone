@@ -33,7 +33,7 @@
                 <input type="time" class="form-control" name="time" id="time" placeholder="<%= product.time ? product.time.toISOString().split('T')[1].substring(0, 5) : '' %>" value="<%= product.time ? product.time.toISOString().split('T')[1].substring(0, 5) : '' %>" required>
                 <br>
                 <label for="contents">세부 내용</label>
-                <textarea name="contents" class="form-control" id="contents" cols="30" rows="10" placeholder="<%= product.contents%>" value="<%= product.contents%>" required></textarea>
+                <textarea name="contents" class="form-control" id="contents" cols="30" rows="10" placeholder="<%= product.contents%>" required><%= product.contents%></textarea>
                 <br>
                 <label for="tier">경기 티어 선택</label>
                 <select name="tier" id="tier">
@@ -51,11 +51,17 @@
                 <label for="fair_tier" style="display: none;">페어티어</label>
                 <input type="number" name="fair_tier" id="fair_tier" value="<%=currentUser.fair_tier%>" style="display: none;" readonly>
                 <br>
-                <button class="submit">수정 완료</button>
+                <div class="btnDiv">
+                    <button class="btn btn-warning update">수정 완료</button>
+                    <div class="backTomypage">
+                        <a href="/mypage/<%= product._id %>">
+                        <button class="btn btn-secondary">
+                            수정 취소
+                        </button>
+                        </a>
+                    </div>
+                </div>
             </form>
-            <div class="backTomypage">
-                <a class="btn btn-secondary" href="/mypage/<%= product._id %>">수정 취소</a>
-            </div>
         </div>
     </body>
     <script>

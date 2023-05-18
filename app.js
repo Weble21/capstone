@@ -10,6 +10,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const cron = require("node-cron");
 
 const User = require("./models/user");
 const Product = require("./models/game");
@@ -70,9 +71,11 @@ app.post("/register", async (req, res) => {
   req.flash("success", "Fair Play에 오신걸 환영합니다!");
   res.redirect("/");
 });
+
 app.get("/login", (req, res) => {
   res.render("login");
 });
+
 app.post(
   "/login",
   passport.authenticate("local", {
@@ -89,6 +92,7 @@ app.post(
     });
   }
 );
+
 app.get("/logout", (req, res) => {
   req.logout(() => {
     req.flash("success", "GoodBye!!");
@@ -98,11 +102,12 @@ app.get("/logout", (req, res) => {
 
 app.get("/", async (req, res) => {
   const products = await Product.find({});
+  const users = await User.find({});
   var now = new Date();
   var currentMonth = now.getMonth() + 1;
   var currentDate = now.getDate(); // 월은 0부터 시작하므로 1을 더해줍니다.
   var currentTime = { month: currentMonth, date: currentDate };
-  res.render("main", { products, currentTime });
+  res.render("main", { products, currentTime, users });
 });
 
 const tiers = ["amateur", "pro", "elite", "beginner"];
@@ -218,6 +223,7 @@ app.get("/mypage/new", (req, res) => {
   }
   res.render("mypage/new", { tiers });
 });
+
 app.post("/mypage/new", async (req, res) => {
   const newProduct = new Product(req.body);
   await newProduct.save();
@@ -249,6 +255,53 @@ app.delete("/mypage/:id", async (req, res) => {
   req.flash("error", "삭제되었습니다!");
   res.redirect("/mypage");
 });
+
+app.post("/products/:id/application", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      id,
+      { application: true },
+      { new: true }
+    );
+
+    if (updatedProduct) {
+      req.flash("success", "경기가 마감되었습니다!");
+      res.redirect("/mypage");
+    } else {
+      req.flash("error", "해당 제품을 찾을 수 없습니다.");
+      res.redirect("/mypage");
+    }
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "application 업데이트 중 오류가 발생했습니다.");
+    res.redirect("/mypage");
+  }
+});
+
+// 매일 00:00에 실행되는 스케줄러 설정
+const task = cron.schedule("30 17 * * *", async () => {
+  // 현재 날짜 계산
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0); // 시간을 00:00:00으로 설정
+
+  // 3일 전 날짜 계산
+  const deletionDate = new Date(currentDate);
+  deletionDate.setDate(deletionDate.getDate() - 2);
+
+  try {
+    // deletionDate 이전의 상품들을 삭제
+    await Product.deleteMany({ time: { $lt: deletionDate } });
+
+    console.log("3일 이전 상품 삭제 완료");
+  } catch (error) {
+    console.error("상품 삭제 중 오류 발생:", error);
+  }
+});
+
+// 스케줄러 실행
+task.start();
 
 app.listen(port, () => {
   console.log(`Listening on Port ${port}`);

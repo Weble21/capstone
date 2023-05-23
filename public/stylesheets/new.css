@@ -230,9 +230,19 @@ label {
     align-items: center;
     gap: 12px;
 }
-.applicant {
-    background-color: #1dd3b0;
-    width: 90px;
-    margin: 0 auto;
-    height: 10vh;
+.checkHeader > h2 {
+    font-size: 2.0em;
 }
+
+.applicant {
+    margin: 20px 0px;
+}
+.applicant > table > thead > tr {
+    font-size: 21px;
+}
+.applicant > table > tbody {
+    color: #14213d;
+}
+
+
+    

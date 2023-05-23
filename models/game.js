@@ -40,7 +40,7 @@ const productSchema = new Schema({
     required: true,
   },
   submittedNum: {
-    type: [String], // 배열로 정의
+    type: [{ username: String, phone_num: String, fair_tier: Number }],
     default: [],
   },
 });

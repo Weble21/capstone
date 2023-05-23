@@ -280,6 +280,40 @@ app.post("/products/:id/application", async (req, res) => {
   }
 });
 
+app.post("/products/:id/apply", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { username, phone_num, fair_tier } = req.user;
+
+    const game = await Product.findById(id);
+
+    if (!game) {
+      req.flash("error", "해당 경기를 찾을 수 없습니다!");
+      return res.status(404).redirect("/");
+    }
+
+    const submittedUser = game.submittedNum.find(
+      (user) =>
+        user.username === username &&
+        user.phone_num === phone_num &&
+        user.fair_tier === fair_tier
+    );
+
+    if (submittedUser) {
+      req.flash("error", "이미 신청한 사용자입니다!");
+      return res.status(400).redirect("/");
+    }
+    game.submittedNum.push({ username, phone_num, fair_tier });
+    await game.save();
+    req.flash("success", "신청이 완료되었습니다!");
+    res.status(200).redirect("/mypage");
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "Error 발생!");
+    res.status(500).redirect("/");
+  }
+});
+
 const currentDate = new Date();
 const minutes = currentDate.getMinutes();
 const hours = currentDate.getHours();

@@ -11,8 +11,8 @@
     </style>
 
     <body>
-        <div class="newBody">
-            <h1>경기 세부 정보</h1>
+        <div class="newBody" style="border: solid 5px #347f83">
+            <h1 style="color: #35ac7a">경기 세부 정보</h1>
             <br>
             <form class="validated-form" novalidate>
                 <label for="sport">종목</label>
@@ -87,7 +87,30 @@
                 </form>
             </div>
             <div class="applicant">
-                
+                  <table class="table text-center">
+                    <thead class="align-middle">
+                        <tr>
+                            <th scope="row" class="col-2">유저 이름</th>
+                            <td class="col-6">전화 번호</td>
+                            <td class="col-2">페어 등급</td>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        <% for(let applicant of product.submittedNum) { %>
+                                <tr>
+                                    <th scope="row">
+                                        <%= applicant.username %>
+                                    </th>
+                                    <td>
+                                        <%= applicant.phone_num %>
+                                    </td>
+                                    <td>
+                                        <%= applicant.fair_tier %>
+                                    </td>
+                                </tr>
+                            <% } %>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>

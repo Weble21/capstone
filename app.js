@@ -280,18 +280,18 @@ app.post("/products/:id/application", async (req, res) => {
   }
 });
 
-// 매일 00:00에 실행되는 스케줄러 설정
-const task = cron.schedule("30 17 * * *", async () => {
-  // 현재 날짜 계산
-  const currentDate = new Date();
-  currentDate.setHours(0, 0, 0, 0); // 시간을 00:00:00으로 설정
+const currentDate = new Date();
+const minutes = currentDate.getMinutes();
+const hours = currentDate.getHours();
 
-  // 3일 전 날짜 계산
+const cronExpression = `${minutes + 1} ${hours} * * *`;
+// 매일 서버를 틀어놀 수 없으니 서버 실행 후 1분 뒤 3일 전의 경기들 삭제
+const task = cron.schedule(cronExpression, async () => {
   const deletionDate = new Date(currentDate);
   deletionDate.setDate(deletionDate.getDate() - 2);
 
   try {
-    // deletionDate 이전의 상품들을 삭제
+    // deletionDate 이전의 경기들을 삭제
     await Product.deleteMany({ time: { $lt: deletionDate } });
 
     console.log("3일 이전 상품 삭제 완료");
@@ -302,6 +302,10 @@ const task = cron.schedule("30 17 * * *", async () => {
 
 // 스케줄러 실행
 task.start();
+
+app.use((req, res) => {
+  res.status(404).render("404");
+});
 
 app.listen(port, () => {
   console.log(`Listening on Port ${port}`);

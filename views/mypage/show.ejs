@@ -93,6 +93,7 @@
                             <th scope="row" class="col-2">유저 이름</th>
                             <td class="col-6">전화 번호</td>
                             <td class="col-2">페어 등급</td>
+                            <td class="col-2">추천하기</td>
                         </tr>
                     </thead>
                     <tbody class="align-middle">
@@ -106,6 +107,12 @@
                                     </td>
                                     <td>
                                         <%= applicant.fair_tier %>
+                                    </td>
+                                    <td>
+                                        <form action="/products/<%= product._id %>/recommend" method="POST" 
+                                            onsubmit="return confirmAndDisable(this, '추천하시겠습니까?');">
+                                            <button type="submit" class="btn-recommend">추천하기</button>
+                                        </form>
                                     </td>
                                 </tr>
                             <% } %>
@@ -134,4 +141,13 @@
                     }, false)
                 })
         })()
+
+        function confirmAndDisable(form, message) {
+          if (confirm(message)) {
+            document.getElementById("submitButton").disabled = true;
+            return true;
+          }
+          return false;
+        }
     </script>
+   

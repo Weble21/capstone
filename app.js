@@ -12,6 +12,11 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const cron = require("node-cron");
 
+const soccerRoutes = require("./routes/soccer");
+const basketballRoutes = require("./routes/basketball");
+const futsalRoutes = require("./routes/futsal");
+const baseballRoutes = require("./routes/baseball");
+
 const User = require("./models/user");
 const Product = require("./models/game");
 
@@ -113,99 +118,10 @@ app.get("/", async (req, res) => {
 const tiers = ["amateur", "pro", "elite", "beginner"];
 const sports = ["baseball", "basketball", "soccer", "futsal"];
 
-app.get("/soccer", async (req, res) => {
-  const { tier } = req.query;
-  const products = await Product.find({ sport: "soccer" });
-  switch (tier) {
-    case "beginner":
-      res.render("soccer/beginner", { tier, products });
-      break;
-    case "amateur":
-      res.render("soccer/amateur", { tier, products });
-      break;
-    case "elite":
-      res.render("soccer/elite", { tier, products });
-      break;
-    case "pro":
-      res.render("soccer/pro", { tier, products });
-      break;
-    default:
-      res.render("soccer/amateur", { tier, products });
-      break;
-  }
-});
-
-app.get("/soccer/:id", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findById(id);
-  res.render("soccer/amateur", { product });
-});
-
-app.get("/baseball", async (req, res) => {
-  const { tier } = req.query;
-  const products = await Product.find({ sport: "baseball" });
-  switch (tier) {
-    case "beginner":
-      res.render("baseball/beginner", { tier, products });
-      break;
-    case "amateur":
-      res.render("baseball/amateur", { tier, products });
-      break;
-    case "elite":
-      res.render("baseball/elite", { tier, products });
-      break;
-    case "pro":
-      res.render("baseball/pro", { tier, products });
-      break;
-    default:
-      res.render("baseball/amateur", { tier, products });
-      break;
-  }
-});
-
-app.get("/basketball", async (req, res) => {
-  const { tier } = req.query;
-  const products = await Product.find({ sport: "basketball" });
-  switch (tier) {
-    case "beginner":
-      res.render("basketball/beginner", { tier, products });
-      break;
-    case "amateur":
-      res.render("basketball/amateur", { tier, products });
-      break;
-    case "elite":
-      res.render("basketball/elite", { tier, products });
-      break;
-    case "pro":
-      res.render("basketball/pro", { tier, products });
-      break;
-    default:
-      res.render("basketball/amateur", { tier, products });
-      break;
-  }
-});
-
-app.get("/futsal", async (req, res) => {
-  const { tier } = req.query;
-  const products = await Product.find({ sport: "futsal" });
-  switch (tier) {
-    case "beginner":
-      res.render("futsal/beginner", { tier, products });
-      break;
-    case "amateur":
-      res.render("futsal/amateur", { tier, products });
-      break;
-    case "elite":
-      res.render("futsal/elite", { tier, products });
-      break;
-    case "pro":
-      res.render("futsal/pro", { tier, products });
-      break;
-    default:
-      res.render("futsal/amateur", { tier, products });
-      break;
-  }
-});
+app.use("/soccer", soccerRoutes);
+app.use("/basketball", basketballRoutes);
+app.use("/baseball", baseballRoutes);
+app.use("/futsal", futsalRoutes);
 
 app.get("/mypage", async (req, res) => {
   const products = await Product.find();
@@ -277,6 +193,47 @@ app.post("/products/:id/application", async (req, res) => {
     console.error(error);
     req.flash("error", "application 업데이트 중 오류가 발생했습니다.");
     res.redirect("/mypage");
+  }
+});
+
+app.post("/products/:id/recommend", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { username, phone_num, fair_tier } = req.body; // 폼에서 제출된 데이터를 받아옵니다.
+    const game = await Product.findById(id);
+
+    if (!game) {
+      req.flash("error", "해당 경기를 찾을 수 없습니다!");
+      return res.status(404).redirect("/");
+    }
+
+    const existingApplicant = game.submittedNum.find(
+      (applicant) =>
+        applicant.username === username &&
+        applicant.phone_num === phone_num &&
+        applicant.fair_tier === fair_tier
+    );
+
+    if (!existingApplicant) {
+      req.flash("error", "유효하지 않은 신청자입니다!");
+      return res.status(400).redirect("/");
+    }
+
+    const user = await User.findOne({ username: existingApplicant.username });
+    if (!user) {
+      req.flash("error", "유효하지 않은 신청자입니다!");
+      return res.status(400).redirect("/");
+    } else {
+      existingApplicant.fair_tier += 1;
+      await user.save();
+    }
+
+    req.flash("success", "추천이 완료되었습니다!");
+    res.status(200).redirect("/mypage");
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "오류가 발생했습니다!");
+    res.status(500).redirect("/404");
   }
 });
 

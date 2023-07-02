@@ -43,7 +43,14 @@
                                 </td>
                                 <td>
                                     <% if(!product.application) { %>
-                                        <button class="applyButton" onclick="apply()">신청하기!</button>
+                                        <% if (currentUser) { %>
+                                        <form action="/products/<%= product._id %>/apply" method="POST" 
+                                            onsubmit="return confirm('신청하시겠습니까?');">
+                                            <button type="submit" class="applyButton">신청하기</button>
+                                        </form>
+                                        <% } else { %>
+                                            <button type="submit" class="applyButton" onclick="apply()">신청하기</button>
+                                            <% } %>
                                     <% } else {%>
                                         <button class="disabledButton" disabled>신청 마감</button>
                                     <% } %>

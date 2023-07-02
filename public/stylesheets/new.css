@@ -244,5 +244,23 @@ label {
     color: #14213d;
 }
 
+.btn-recommend {
+    background-color: #00d30b;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 5px;
+    border: solid 2px rgb(0, 255, 0);
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+.btn-recommend:hover {
+    background-color: #f1f500;
+    color: #2f00ff;
+    border-radius: 16px;
+    border: solid 2px #fbff00;
+    box-shadow: 0em 0.2em 0.2em -0.1em #f4a908;
+    transform: translateY(-0.1em);
+    cursor: pointer;
+}
+
 
     

@@ -16,6 +16,7 @@ const soccerRoutes = require("./routes/soccer");
 const basketballRoutes = require("./routes/basketball");
 const futsalRoutes = require("./routes/futsal");
 const baseballRoutes = require("./routes/baseball");
+const mypageRoutes = require("./routes/mypage");
 
 const User = require("./models/user");
 const Product = require("./models/game");
@@ -123,54 +124,7 @@ app.use("/basketball", basketballRoutes);
 app.use("/baseball", baseballRoutes);
 app.use("/futsal", futsalRoutes);
 
-app.get("/mypage", async (req, res) => {
-  const products = await Product.find();
-  if (!req.isAuthenticated()) {
-    req.flash("error", "로그인하세요");
-    return res.redirect("/login");
-  }
-  res.render("mypage/mypage", { products });
-});
-
-app.get("/mypage/new", (req, res) => {
-  if (!req.isAuthenticated()) {
-    req.flash("error", "로그인하세요");
-    return res.redirect("/login");
-  }
-  res.render("mypage/new", { tiers });
-});
-
-app.post("/mypage/new", async (req, res) => {
-  const newProduct = new Product(req.body);
-  await newProduct.save();
-  req.flash("success", "등록되었습니다!");
-  res.redirect("/mypage");
-});
-
-app.get("/mypage/:id", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findById(id);
-  res.render("mypage/show", { product, tiers, sports });
-});
-app.get("/mypage/:id/edit", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findById(id);
-  res.render("mypage/edit", { product, tiers, sports });
-});
-app.put("/mypage/:id", async (req, res) => {
-  const { id } = req.params;
-  const product = await Product.findByIdAndUpdate(id, req.body, {
-    runValidators: true,
-  });
-  res.redirect(`/mypage/${product._id}`);
-});
-
-app.delete("/mypage/:id", async (req, res) => {
-  const { id } = req.params;
-  const deletedProduct = await Product.findByIdAndDelete(id);
-  req.flash("error", "삭제되었습니다!");
-  res.redirect("/mypage");
-});
+app.use("/mypage", mypageRoutes);
 
 app.post("/products/:id/application", async (req, res) => {
   const { id } = req.params;

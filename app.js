@@ -17,6 +17,8 @@ const basketballRoutes = require("./routes/basketball");
 const futsalRoutes = require("./routes/futsal");
 const baseballRoutes = require("./routes/baseball");
 const mypageRoutes = require("./routes/mypage");
+const loginRoutes = require("./routes/login");
+const productRoutes = require("./routes/product");
 
 const User = require("./models/user");
 const Product = require("./models/game");
@@ -67,45 +69,6 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/register", (req, res) => {
-  res.render("register");
-});
-app.post("/register", async (req, res) => {
-  const { email, username, password, phone_num } = req.body;
-  const user = new User({ email, username, phone_num });
-  const registeredUser = await User.register(user, password);
-  req.flash("success", "Fair Play에 오신걸 환영합니다!");
-  res.redirect("/");
-});
-
-app.get("/login", (req, res) => {
-  res.render("login");
-});
-
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    failureFlash: true,
-    failureRedirect: "/login",
-  }),
-  (req, res) => {
-    req.login(req.user, function (err) {
-      if (err) {
-        return next(err);
-      }
-      req.flash("success", "로그인되었습니다.");
-      return res.redirect("/");
-    });
-  }
-);
-
-app.get("/logout", (req, res) => {
-  req.logout(() => {
-    req.flash("success", "GoodBye!!");
-    res.redirect("/");
-  });
-});
-
 app.get("/", async (req, res) => {
   const products = await Product.find({});
   const users = await User.find({});
@@ -116,9 +79,6 @@ app.get("/", async (req, res) => {
   res.render("main", { products, currentTime, users });
 });
 
-const tiers = ["amateur", "pro", "elite", "beginner"];
-const sports = ["baseball", "basketball", "soccer", "futsal"];
-
 app.use("/soccer", soccerRoutes);
 app.use("/basketball", basketballRoutes);
 app.use("/baseball", baseballRoutes);
@@ -126,104 +86,8 @@ app.use("/futsal", futsalRoutes);
 
 app.use("/mypage", mypageRoutes);
 
-app.post("/products/:id/application", async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const updatedProduct = await Product.findByIdAndUpdate(
-      id,
-      { application: true },
-      { new: true }
-    );
-
-    if (updatedProduct) {
-      req.flash("success", "경기가 마감되었습니다!");
-      res.redirect("/mypage");
-    } else {
-      req.flash("error", "해당 제품을 찾을 수 없습니다.");
-      res.redirect("/mypage");
-    }
-  } catch (error) {
-    console.error(error);
-    req.flash("error", "application 업데이트 중 오류가 발생했습니다.");
-    res.redirect("/mypage");
-  }
-});
-
-app.post("/products/:id/recommend", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { username, phone_num, fair_tier } = req.body; // 폼에서 제출된 데이터를 받아옵니다.
-    const game = await Product.findById(id);
-
-    if (!game) {
-      req.flash("error", "해당 경기를 찾을 수 없습니다!");
-      return res.status(404).redirect("/");
-    }
-
-    const existingApplicant = game.submittedNum.find(
-      (applicant) =>
-        applicant.username === username &&
-        applicant.phone_num === phone_num &&
-        applicant.fair_tier === fair_tier
-    );
-
-    if (!existingApplicant) {
-      req.flash("error", "유효하지 않은 신청자입니다!");
-      return res.status(400).redirect("/");
-    }
-
-    const user = await User.findOne({ username: existingApplicant.username });
-    if (!user) {
-      req.flash("error", "유효하지 않은 신청자입니다!");
-      return res.status(400).redirect("/");
-    } else {
-      existingApplicant.fair_tier += 1;
-      await user.save();
-    }
-
-    req.flash("success", "추천이 완료되었습니다!");
-    res.status(200).redirect("/mypage");
-  } catch (error) {
-    console.error(error);
-    req.flash("error", "오류가 발생했습니다!");
-    res.status(500).redirect("/404");
-  }
-});
-
-app.post("/products/:id/apply", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { username, phone_num, fair_tier } = req.user;
-
-    const game = await Product.findById(id);
-
-    if (!game) {
-      req.flash("error", "해당 경기를 찾을 수 없습니다!");
-      return res.status(404).redirect("/");
-    }
-
-    const submittedUser = game.submittedNum.find(
-      (user) =>
-        user.username === username &&
-        user.phone_num === phone_num &&
-        user.fair_tier === fair_tier
-    );
-
-    if (submittedUser) {
-      req.flash("error", "이미 신청한 사용자입니다!");
-      return res.status(400).redirect("/");
-    }
-    game.submittedNum.push({ username, phone_num, fair_tier });
-    await game.save();
-    req.flash("success", "신청이 완료되었습니다!");
-    res.status(200).redirect("/mypage");
-  } catch (error) {
-    console.error(error);
-    req.flash("error", "Error 발생!");
-    res.status(500).redirect("/");
-  }
-});
+app.use("/", loginRoutes);
+app.use("/products", productRoutes);
 
 const currentDate = new Date();
 const minutes = currentDate.getMinutes();
@@ -244,7 +108,6 @@ const task = cron.schedule(cronExpression, async () => {
     console.error("상품 삭제 중 오류 발생:", error);
   }
 });
-
 // 스케줄러 실행
 task.start();
 

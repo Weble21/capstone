@@ -3,6 +3,7 @@ const router = express.Router();
 const Product = require("../models/game");
 
 const tiers = ["amateur", "pro", "elite", "beginner"];
+const sports = ["baseball", "basketball", "soccer", "futsal"];
 
 router.get("/", async (req, res) => {
   const products = await Product.find();

@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require("passport");
 const router = express.Router();
 
 const Product = require("../models/game");
@@ -29,6 +30,11 @@ router.post("/:id/application", async (req, res) => {
 
 router.post("/:id/recommend", async (req, res) => {
   try {
+    if (!req.isAuthenticated()) {
+      console.log("errr");
+      req.flash("error", "로그인하세요");
+      return res.redirect("/login");
+    }
     const { id } = req.params;
     const { username, phone_num, fair_tier } = req.body; // 폼에서 제출된 데이터를 받아옵니다.
     const game = await Product.findById(id);
@@ -91,6 +97,7 @@ router.post("/:id/apply", async (req, res) => {
       req.flash("error", "이미 신청한 사용자입니다!");
       return res.status(400).redirect("/");
     }
+
     game.submittedNum.push({ username, phone_num, fair_tier });
     await game.save();
     req.flash("success", "신청이 완료되었습니다!");

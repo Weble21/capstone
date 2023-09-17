@@ -296,3 +296,13 @@ footer div {
     height: 50%;
     width: 90%;
 }
+
+.time-highlight {
+    color: black;
+    font-weight: bold; /* 시간 강조 스타일 */
+}
+
+.time-highlight {
+    color: black;
+    font-weight: bold; /* 시간 강조 스타일 */
+}

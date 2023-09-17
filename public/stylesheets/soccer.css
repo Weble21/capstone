@@ -100,3 +100,9 @@
     flex-wrap: wrap;
     justify-content: flex-end;
 }
+
+.time-highlight {
+    color: black;
+    font-weight: bold; /* 시간 강조 스타일 */
+}
+  

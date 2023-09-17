@@ -84,3 +84,7 @@ a {
 .mainBox{
     margin-bottom: 30px;
 }
+.time-highlight {
+    color: black;
+    font-weight: bold; /* 시간 강조 스타일 */
+}

@@ -51,6 +51,27 @@ productSchema.pre("save", function (next) {
   next();
 });
 
+// 날짜 필드를 원하는 형식으로 가상 필드로 정의
+productSchema.virtual("formattedDay").get(function () {
+  const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    weekday: "short",
+  };
+  return this.time.toLocaleDateString("ko-KR", options);
+});
+// 날짜 필드를 원하는 형식으로 가상 필드로 정의
+productSchema.virtual("formattedTime").get(function () {
+  const options = {
+    hour: "2-digit",
+    minute: "2-digit",
+    //timeZoneName: "short",
+    hour12: false,
+  };
+  return this.time.toLocaleTimeString("ko-KR", options);
+});
+
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;

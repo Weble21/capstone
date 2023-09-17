@@ -33,7 +33,10 @@
                                     <%=product.area%>
                                 </th>
                                 <td>
-                                    <%=product.time%>
+                                    <%=product.formattedDay%>
+                                    <div class="time-highlight">
+                                        <%=product.formattedTime%>
+                                    </div>                           
                                 </td>
                                 <td>
                                     <%=product.contents%>
@@ -48,7 +51,7 @@
                                             onsubmit="return confirm('신청하시겠습니까?');">
                                             <button type="submit" class="applyButton">신청하기</button>
                                         </form>
-                                        <% } else { %>
+                                        <% } else { %>   
                                             <button type="submit" class="applyButton" onclick="apply()">신청하기</button>
                                             <% } %>
                                     <% } else {%>

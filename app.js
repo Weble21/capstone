@@ -112,11 +112,9 @@ const task = cron.schedule(cronExpression, async () => {
 task.start();
 
 app.use((req, res) => {
-  res.status(404).render("404");
+  res.status(404).render("404", { imagePath: "/pictures/box.png" });
 });
 
 app.listen(port, () => {
   console.log(`Listening on Port ${port}`);
 });
-
-//오류로 인한 덮어쓰기 -v2

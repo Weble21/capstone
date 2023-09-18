@@ -3,11 +3,15 @@ h1 {
     margin: 0 auto;
 }
 .box {
+    display: flex;
+    flex-direction: row;   
+    flex-wrap: wrap;
+    gap: 12px;
     width: 90%;
     margin: 0 auto;
 }
 
-.newGame {
+.newGame, .applyGame {
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -28,12 +32,32 @@ td {
     color: black;
 }
 
+.btn-info {
+    background-color: #758bfd;
+    border: solid 1px #758bfd;
+}
+
 .btn-info:hover {
     background-color: #5edcf5;
 }
 
 .btn-info:hover a {
     color: #ffffff;
+}
+
+.btn-warning {
+    background-color: #ff8600;
+    border: solid 1px #ff8600;
+}
+.btn-warning:hover {
+    background-color: #ffb01d;
+    border: solid 1px #ffb01d;
+}
+.btn-warning:hover a {
+    color: #ffffff;
+}
+.btn-warning:focus {
+    background-color: #ffb01d;
 }
 
 .mypageHeader {

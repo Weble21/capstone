@@ -113,8 +113,9 @@
                         <tr>
                             <th scope="row" class="col-1">종목</th>
                             <td class="col-2">시간</td>
+                            <td class="col-1">지역</td>
                             <td class="col-4">내용</td>
-                            <td class="col-2">티어</td>
+                            <td class="col-1">티어</td>
                             <td class="col-1">작성자(등급)</td>
                             <td class="col-2">신청</td>
                         </tr>
@@ -138,6 +139,9 @@
                                             <div class="time-highlight">
                                                 <%=product.formattedTime%>
                                             </div>
+                                    </td>
+                                    <td>
+                                        <%= product.area %>
                                     </td>
                                     <td>
                                         <%= product.contents %>

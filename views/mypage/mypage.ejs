@@ -21,14 +21,14 @@
             </div>
         </div>
         <div class="mainBox">
-            <h2 class="registedPlay box">등록된 경기들⏳</h2>
+            <h2 class="registedPlay box">내가 등록한 경기들⏳</h2>
             <table class="table text-center">
                 <thead class="align-middle">
                     <tr>
-                        <th scope="row" class="col-1">지역</th>
+                        <th scope="row" class="col-1">종목</th>
                         <td class="col-2">시간</td>
-                        <td class="col-1">종목</td>
-                        <td class="col-3">내용</td>
+                        <td class="col-1">지역</td>
+                        <td class="col-4">내용</td>
                         <td class="col-1">티어</td>
                         <td class="col-1">자세히 보기</td>
                     </tr>
@@ -38,7 +38,12 @@
                         <tbody class="align-middle">
                             <tr>
                                 <th scope="row">
-                                    <%=product.area%>
+                                    <% switch (product.sport) { case 'basketball' : %> 농구 <% break; %>
+                                           <% case 'baseball': %> 야구 <% break; %>
+                                            <%    case 'soccer': %> 축구 <% break; %>
+                                              <%      case 'futsal': %> 풋살 <% break; %>
+                                                <%        default: %> 기타 <% break; %>
+                                                            <% } %>
                                 </th>
                                 <td>
                                     <%=product.formattedDay%>
@@ -46,19 +51,15 @@
                                         <%=product.formattedTime%>
                                     </div>                           
                                 </td>
-                                <td scope="row">
-                                    <% switch (product.sport) { case 'basketball' : %> 농구 <% break; %>
-                                           <% case 'baseball': %> 야구 <% break; %>
-                                            <%    case 'soccer': %> 축구 <% break; %>
-                                              <%      case 'futsal': %> 풋살 <% break; %>
-                                                <%        default: %> 기타 <% break; %>
-                                                            <% } %>
+                                <td>
+                                    <%=product.area%>
                                 </td>
+                                
                                 <td class="content">
                                     <%=product.contents%>
                                 </td>
                                 <td>
-                                    <%=product.tier%>
+                                    <%= product.tier.charAt(0).toUpperCase() + product.tier.slice(1) %>
                                 </td>
                                 <td>
                                     <a class="btn btn-outline-primary" href="/mypage/<%= product._id %>">보기</a>
@@ -73,10 +74,10 @@
             <table class="table text-center">
                 <thead class="align-middle">
                     <tr>
-                        <th scope="row" class="col-1">지역</th>
+                        <th scope="row" class="col-1">종목</th>
                         <td class="col-2">시간</td>
-                        <td class="col-1">종목</td>
-                        <td class="col-3">내용</td>
+                        <td class="col-1">지역</td>
+                        <td class="col-4">내용</td>
                         <td class="col-1">티어</td>
                         <td class="col-1">자세히 보기</td>
                     </tr>
@@ -86,7 +87,12 @@
                         <tbody class="align-middle">
                             <tr>
                                 <th scope="row">
-                                    <%=product.area%>
+                                    <% switch (product.sport) { case 'basketball' : %> 농구 <% break; %>
+                                           <% case 'baseball': %> 야구 <% break; %>
+                                            <%    case 'soccer': %> 축구 <% break; %>
+                                              <%      case 'futsal': %> 풋살 <% break; %>
+                                                <%        default: %> 기타 <% break; %>
+                                                            <% } %>
                                 </th>
                                 <td>
                                     <%=product.formattedDay%>
@@ -94,14 +100,10 @@
                                         <%=product.formattedTime%>
                                     </div>                           
                                 </td>
-                                <td scope="row">
-                                    <% switch (product.sport) { case 'basketball' : %> 농구 <% break; %>
-                                           <% case 'baseball': %> 야구 <% break; %>
-                                            <%    case 'soccer': %> 축구 <% break; %>
-                                              <%      case 'futsal': %> 풋살 <% break; %>
-                                                <%        default: %> 기타 <% break; %>
-                                                            <% } %>
+                                <td>
+                                    <%=product.area%>
                                 </td>
+                                
                                 <td class="content">
                                     <%=product.contents%>
                                 </td>

@@ -32,6 +32,10 @@ router.post("/new", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   const product = await Product.findById(id);
+  if (!req.isAuthenticated()) {
+    req.flash("error", "접근권한이 없습니다");
+    return res.redirect("/login");
+  }
   res.render("mypage/show", { product, tiers, sports });
 });
 

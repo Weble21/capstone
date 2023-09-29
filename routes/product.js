@@ -35,42 +35,53 @@ router.post("/:id/recommend", async (req, res) => {
       req.flash("error", "로그인하세요");
       return res.redirect("/login");
     }
-    const { id } = req.params;
-    const { username, phone_num, fair_tier } = req.body; // 폼에서 제출된 데이터를 받아옵니다.
-    const game = await Product.findById(id);
 
-    if (!game) {
+    const { id } = req.params; // 폼에서 제출된 게임의 id.
+    const game = await Product.findById(id);
+    const { username: current_username, phone_num: current_phone_num } =
+      req.user;
+    const idx = parseInt(req.body.idx);
+
+    if (game === null) {
       req.flash("error", "해당 경기를 찾을 수 없습니다!");
       return res.status(404).redirect("/");
     }
 
-    const existingApplicant = game.submittedNum.find(
-      (applicant) =>
-        applicant.username === username &&
-        applicant.phone_num === phone_num &&
-        applicant.fair_tier === fair_tier
-    );
-
-    if (!existingApplicant) {
-      req.flash("error", "유효하지 않은 신청자입니다!");
-      return res.status(400).redirect("/");
-    }
-
-    const user = await User.findOne({ username: existingApplicant.username });
-    if (!user) {
-      req.flash("error", "유효하지 않은 신청자입니다!");
-      return res.status(400).redirect("/");
+    //game.submittedNum는 배열이기에 [idx]으로 배열에 접근
+    if (
+      current_username === game.submittedNum[idx].username &&
+      current_phone_num === game.submittedNum[idx].phone_num
+    ) {
+      req.flash("error", "자기자신은 추천할 수 없습니다");
+      return res.status(400).redirect("/mypage");
     } else {
-      existingApplicant.fair_tier += 1;
-      await user.save();
+      //추천받은 유저의 fair_tier +1;
+      const nameToFind = game.submittedNum[idx].name;
+      const phoneNumToFind = game.submittedNum[idx].phone_num;
+      try {
+        const userToUp = await User.findOne({
+          name: nameToFind,
+          phone_num: phoneNumToFind,
+        });
+        if (!userToUp) {
+          req.flash("error", "추천한 사용자가 존재하지 않습니다");
+          return res.status(404).redirect("/404");
+        }
+        userToUp.fair_tier += 1;
+        await userToUp.save();
+        req.flash("success", "test");
+        console.log(userToUp.fair_tier);
+      } catch (err) {
+        console.log("Update error!", err);
+        req.flash("error", "업데이트 중 오류가 발생하였습니다.");
+      }
     }
 
-    req.flash("success", "추천이 완료되었습니다!");
     res.status(200).redirect("/mypage");
   } catch (error) {
     console.error(error);
     req.flash("error", "오류가 발생했습니다!");
-    res.status(500).redirect("/404");
+    res.status(500).redirect("/");
   }
 });
 
@@ -87,15 +98,12 @@ router.post("/:id/apply", async (req, res) => {
     }
 
     const submittedUser = game.submittedNum.find(
-      (user) =>
-        user.username === username &&
-        user.phone_num === phone_num &&
-        user.fair_tier === fair_tier
+      (user) => user.username === username && user.phone_num === phone_num
     );
 
     if (submittedUser) {
       req.flash("error", "이미 신청한 사용자입니다!");
-      return res.status(400).redirect("/");
+      return res.status(400).redirect("/mypage");
     }
 
     game.submittedNum.push({ username, phone_num, fair_tier });

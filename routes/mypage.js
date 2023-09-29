@@ -22,6 +22,15 @@ router.get("/new", (req, res) => {
   res.render("mypage/new", { tiers });
 });
 
+router.get("/applied", async (req, res) => {
+  const products = await Product.find();
+  if (!req.isAuthenticated()) {
+    req.flash("error", "로그인하세요");
+    return res.redirect("/login");
+  }
+  res.render("mypage/applied", { products, sports, tiers });
+});
+
 router.post("/new", async (req, res) => {
   const newProduct = new Product(req.body);
   await newProduct.save();

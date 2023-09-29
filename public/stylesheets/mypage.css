@@ -15,10 +15,20 @@ h1 {
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
-}
-.newGame a {
+    font-weight: 800;
     color: #f7f7f7;
 }
+
+.newGame:hover, .applyGame:hover {
+    color: #f1f1f1;
+    font-weight: 600;
+}
+
+.newGameLink:active, .applyGame:active {
+    color: #f1f1f1;
+    font-weight: 600;
+}
+
 
 tr {
     cursor: default;

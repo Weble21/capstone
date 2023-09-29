@@ -40,7 +40,7 @@ router.post(
         return next(err);
       }
       req.flash("success", "로그인되었습니다.");
-      return res.redirect("/");
+      return res.redirect("/mypage");
     });
   }
 );

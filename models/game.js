@@ -36,7 +36,6 @@ const productSchema = new Schema({
     type: Number,
     default: 1,
     min: 1,
-    max: 6,
     required: true,
   },
   submittedNum: {

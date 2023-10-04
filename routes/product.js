@@ -69,7 +69,7 @@ router.post("/:id/recommend", async (req, res) => {
         }
         userToUp.fair_tier += 1;
         await userToUp.save();
-        req.flash("success", "test");
+        req.flash("success", "추천이 완료되었습니다👍");
         console.log(userToUp.fair_tier);
       } catch (err) {
         console.log("Update error!", err);

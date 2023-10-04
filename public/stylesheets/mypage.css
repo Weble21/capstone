@@ -63,11 +63,24 @@ td {
     background-color: #ffb01d;
     border: solid 1px #ffb01d;
 }
-.btn-warning:hover a {
-    color: #ffffff;
+.btn-warning:active a {
+    color: #ffffff !important;
 }
 .btn-warning:focus {
     background-color: #ffb01d;
+}
+
+.btn-success {
+    background-color: #2fbf71;
+}
+
+.btn-success:hover {
+    background-color: #8cd867;
+    border: solid 1px #8cd867;
+}
+
+.btn-success:active {
+    background-color: #8cd867 !important;
 }
 
 .mypageHeader {

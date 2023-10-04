@@ -110,12 +110,16 @@
                                                 <%= applicant.fair_tier %>
                                             </td>
                                             <td>
+                                                <% if(product.application) { %>
                                                 <form action="/products/<%= product._id %>/recommend" method="POST"
                                                     onsubmit="return confirmAndDisable(this, '추천하시겠습니까?');">
                                                     <!-- hidden 필드에 인덱스 값을 저장 -->
                                                     <input type="hidden" name="idx" value="<%= idx %>">
                                                     <button type="submit" class="btn-recommend">추천하기</button>
                                                 </form>
+                                                <% } else { %>
+                                                    <button title="마감된 경기만 추천이 가능합니다." type="submit" class="disabledButton" disabled>추천하기</button>
+                                                <% } %>
                                             </td>
                                         </tr>
                                         <% idx++ %>

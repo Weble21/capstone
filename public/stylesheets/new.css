@@ -49,6 +49,11 @@ label {
     text-align: center;
     display: block;
 }
+
+.newBody>h6 {
+    text-align: center;
+}
+
 .newBody form {
     margin: 0 auto;
     display: flex;

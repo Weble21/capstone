@@ -1,3 +1,25 @@
+<style>
+    .btn-danger-to-delete {
+        border-radius: 17px;
+        background: none;
+        color: #ef233c;
+        border: 2px solid;
+        padding: 0.3em 1.2em;
+        font-size: var(16px);
+        transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+    }
+
+
+    .btn-danger-to-delete:hover {
+        border-color: #ef233c;
+        color: white;
+        background-color: #ef233c;
+        /* offset-x | offset-y | blur-radius | spread-redius | color */
+        box-shadow: 0em 0.3em 0.3em -0.1em #e9142d;
+        transform: translateY(-0.1em);
+        cursor: pointer;
+    }
+</style>
 <% layout('components/boilerplate.ejs') -%>
     <% if(currentUser) { %>
         <link rel="stylesheet" href="/stylesheets/mypage.css">
@@ -27,58 +49,114 @@
 
         <% } %>
 
-        <h2 class="registedPlay box">신청한 경기🔥</h2>
-        <table class="table text-center">
-            <thead class="align-middle">
-                <tr>
-                    <th scope="row" class="col-1">종목</th>
-                    <td class="col-2">시간</td>
-                    <td class="col-1">지역</td>
-                    <td class="col-4">내용</td>
-                    <td class="col-1">작성자(페어점수)</td>
-                    <td class="col-1">취소하기</td>
-                </tr>
-            </thead>
-            <% for(let product of products) { %>
-                <% if (product.application === false) { %>
-                <% for(let game of product.submittedNum) { %>
-                <% if(game.username === currentUser.username && game.phone_num === currentUser.phone_num) { %>
-                    <tbody class="align-middle">
-                        <tr>
-                            <th scope="row">
-                                <% switch (product.sport) { case 'basketball' : %> 농구 <% break; %>
-                                        <% case 'baseball' : %> 야구 <% break; %>
-                                                <% case 'soccer' : %> 축구 <% break; %>
-                                                        <% case 'futsal' : %> 풋살 <% break; %>
-                                                                <% default: %> 기타 <% break; %>
-                                                                        <% } %>
-                            </th>
-                            <td>
-                                <%=product.formattedDay%>
-                                    <div class="time-highlight">
-                                        <%=product.formattedTime%>
-                                    </div>
-                            </td>
-                            <td>
-                                <%=product.area%>
-                            </td>
+            <h2 class="registedPlay box">신청한 경기🔥</h2>
+            <table class="table text-center">
+                <thead class="align-middle">
+                    <tr>
+                        <th scope="row" class="col-1">종목</th>
+                        <td class="col-2">시간</td>
+                        <td class="col-1">지역</td>
+                        <td class="col-4">내용</td>
+                        <td class="col-1">작성자(페어점수)</td>
+                        <td class="col-1">취소하기</td>
+                    </tr>
+                </thead>
+                <% for(let product of products) { %>
+                    <% if (product.application===false) { %>
+                        <% for(let game of product.submittedNum) { %>
+                            <% if(game.username===currentUser.username && game.phone_num===currentUser.phone_num) { %>
+                                <tbody class="align-middle">
+                                    <tr>
+                                        <th scope="row">
+                                            <% switch (product.sport) { case 'basketball' : %> 농구 <% break; %>
+                                                    <% case 'baseball' : %> 야구 <% break; %>
+                                                            <% case 'soccer' : %> 축구 <% break; %>
+                                                                    <% case 'futsal' : %> 풋살 <% break; %>
+                                                                            <% default: %> 기타 <% break; %>
+                                                                                    <% } %>
+                                        </th>
+                                        <td>
+                                            <%=product.formattedDay%>
+                                                <div class="time-highlight">
+                                                    <%=product.formattedTime%>
+                                                </div>
+                                        </td>
+                                        <td>
+                                            <%=product.area%>
+                                        </td>
 
-                            <td class="content">
-                                <%=product.contents%>
-                            </td>
-                            <td>
-                                <%= product.username %>(<%= product.fair_tier %>)
-                            </td>
-                            <td>
-                                <a>취소하기</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <% } %>
-                    <% } %>
-            <% } %>
-            <% } %>
-        </table>
+                                        <td class="content">
+                                            <%=product.contents%>
+                                        </td>
+                                        <td>
+                                            <%= product.username %>(<%= product.fair_tier %>)
+                                        </td>
+                                        <td>
+                                            <form action="/mypage/<%=product._id%>?_method=DELETE" method="POST"
+                                                onsubmit="return confirm('신청을 취소하시겠습니까?');">
+                                                <button class="btn btn-danger-to-delete">취소하기</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <% } %>
+                                    <% } %>
+                                        <% } %>
+                                            <% } %>
+            </table>
+            <br><br><br>
+            <h2 class="registedPlay box">마감된 경기🎯</h2>
+            <table class="table text-center">
+                <thead class="align-middle">
+                    <tr>
+                        <th scope="row" class="col-1">종목</th>
+                        <td class="col-2">시간</td>
+                        <td class="col-1">지역</td>
+                        <td class="col-4">내용</td>
+                        <td class="col-1">작성자(페어점수)</td>
+                        <td class="col-1">평가하기</td>
+                    </tr>
+                </thead>
+                <% for(let product of products) { %>
+                    <% if (product.application===true) { %>
+                        <% for(let game of product.submittedNum) { %>
+                            <% if(game.username===currentUser.username && game.phone_num===currentUser.phone_num) { %>
+                                <tbody class="align-middle">
+                                    <tr>
+                                        <th scope="row">
+                                            <% switch (product.sport) { case 'basketball' : %> 농구 <% break; %>
+                                                    <% case 'baseball' : %> 야구 <% break; %>
+                                                            <% case 'soccer' : %> 축구 <% break; %>
+                                                                    <% case 'futsal' : %> 풋살 <% break; %>
+                                                                            <% default: %> 기타 <% break; %>
+                                                                                    <% } %>
+                                        </th>
+                                        <td>
+                                            <%=product.formattedDay%>
+                                                <div class="time-highlight">
+                                                    <%=product.formattedTime%>
+                                                </div>
+                                        </td>
+                                        <td>
+                                            <%=product.area%>
+                                        </td>
 
-        <!-- <h2 class="registedPlay box">마감된 경기🎯</h2> -->
-        
+                                        <td class="content">
+                                            <%=product.contents%>
+                                        </td>
+                                        <td>
+                                            <%= product.username %>(<%= product.fair_tier %>)
+                                        </td>
+                                        <td>
+                                            <form action="" method="POST" onsubmit="return confirm('신청을 취소하시겠습니까?');">
+                                                <button class="btn btn-info">평가하기</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <% } %>
+                                    <% } %>
+                                        <% } %>
+                                            <% } %>
+            </table>
+            <br><br>

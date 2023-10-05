@@ -33,7 +33,7 @@ router.post("/:id/recommend", async (req, res) => {
     if (!req.isAuthenticated()) {
       console.log("errr");
       req.flash("error", "로그인하세요");
-      return res.redirect("/login");
+      return res.redirect("/");
     }
 
     const { id } = req.params; // 폼에서 제출된 게임의 id.
@@ -116,5 +116,7 @@ router.post("/:id/apply", async (req, res) => {
     res.status(500).redirect("/");
   }
 });
+
+router.delete("/:id/");
 
 module.exports = router;

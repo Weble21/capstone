@@ -28,6 +28,38 @@ router.post("/:id/application", async (req, res) => {
   }
 });
 
+router.post("/:id/apply", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { username, phone_num, fair_tier } = req.user;
+
+    const game = await Product.findById(id);
+
+    if (!game) {
+      req.flash("error", "해당 경기를 찾을 수 없습니다!");
+      return res.status(404).redirect("/");
+    }
+
+    const submittedUser = game.submittedNum.find(
+      (user) => user.username === username && user.phone_num === phone_num
+    );
+
+    if (submittedUser) {
+      req.flash("error", "이미 신청한 사용자입니다!");
+      return res.status(400).redirect("/mypage");
+    }
+
+    game.submittedNum.push({ username, phone_num, fair_tier });
+    await game.save();
+    req.flash("success", "신청이 완료되었습니다!");
+    res.status(200).redirect("/mypage");
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "Error 발생!");
+    res.status(500).redirect("/");
+  }
+});
+
 router.post("/:id/recommend", async (req, res) => {
   try {
     if (!req.isAuthenticated()) {
@@ -85,38 +117,45 @@ router.post("/:id/recommend", async (req, res) => {
   }
 });
 
-router.post("/:id/apply", async (req, res) => {
+router.post("/:id/popData", async (req, res) => {
   try {
+    if (!req.isAuthenticated()) {
+      console.log("errr");
+      req.flash("error", "로그인하세요");
+      return res.redirect("/login");
+    }
     const { id } = req.params;
-    const { username, phone_num, fair_tier } = req.user;
+    const { username: current_username, phone_num: current_phone_num } =
+      req.user;
 
     const game = await Product.findById(id);
 
     if (!game) {
-      req.flash("error", "해당 경기를 찾을 수 없습니다!");
-      return res.status(404).redirect("/");
+      req.flash("error", "삭제된 경기입니다!");
+      return res.status(404).redirect("/mypage");
     }
 
-    const submittedUser = game.submittedNum.find(
-      (user) => user.username === username && user.phone_num === phone_num
-    );
+    const matchingIdx = game.submittedNum.findIndex((submittedNum) => {
+      return (
+        submittedNum.username === current_username &&
+        submittedNum.phone_num === current_phone_num
+      );
+    });
 
-    if (submittedUser) {
-      req.flash("error", "이미 신청한 사용자입니다!");
-      return res.status(400).redirect("/mypage");
+    if (matchingIdx !== -1) {
+      //일치하는 데이터의 인덱스에 접근하여 삭제
+      game.submittedNum.splice(matchingIdx, 1);
     }
 
-    game.submittedNum.push({ username, phone_num, fair_tier });
     await game.save();
-    req.flash("success", "신청이 완료되었습니다!");
-    res.status(200).redirect("/mypage");
+
+    req.flash("success", "신청이 취소되었습니다.");
+    res.redirect("/mypage/applied");
   } catch (error) {
-    console.error(error);
-    req.flash("error", "Error 발생!");
-    res.status(500).redirect("/");
+    console.log(error);
+    req.flash("error", "Error!");
+    res.status(500).redirect("/404");
   }
 });
-
-router.delete("/:id/");
 
 module.exports = router;

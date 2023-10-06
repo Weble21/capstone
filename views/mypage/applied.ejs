@@ -92,7 +92,7 @@
                                             <%= product.username %>(<%= product.fair_tier %>)
                                         </td>
                                         <td>
-                                            <form action="/mypage/<%=product._id%>?_method=DELETE" method="POST"
+                                            <form action="/products/<%= product._id %>/popData" method="POST"
                                                 onsubmit="return confirm('신청을 취소하시겠습니까?');">
                                                 <button class="btn btn-danger-to-delete">취소하기</button>
                                             </form>
@@ -148,7 +148,7 @@
                                             <%= product.username %>(<%= product.fair_tier %>)
                                         </td>
                                         <td>
-                                            <form action="" method="POST" onsubmit="return confirm('신청을 취소하시겠습니까?');">
+                                            <form action="/products/<% product._id %>/delete" method="POST" onsubmit="return confirm('신청을 취소하시겠습니까?');">
                                                 <button class="btn btn-info">평가하기</button>
                                             </form>
                                         </td>

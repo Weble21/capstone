@@ -62,29 +62,35 @@
                         <br>
             </form>
             <div id="backTomypage">
+                <% if(!product.application) { %>
                 <a href="/mypage/<%= product._id %>/edit">
                     <button class="btn btn-warning">
                         수정하기
                     </button>
                 </a>
+               <% } %>
                 <a href="/mypage">
                     <button class="btn btn-secondary">
                         마이페이지로 돌아가기
                     </button>
                 </a>
+                <% if(!product.application) { %>
                 <form action="/mypage/<%=product._id%>?_method=DELETE" method="POST"
                     onsubmit="return confirm('정말 삭제하시겠습니까?');">
                     <button class="btn btn-danger">삭제하기</button>
                 </form>
+                <% } %>
             </div>
         </div>
         <div class="checkApplicant">
             <div class="checkHeader">
                 <h2>경기 관리 및 신청자 정보</h2>
+                <% if(!product.application) { %>
                 <form action="/products/<%= product._id %>/application" method="POST"
-                    onsubmit="return confirm('정말 마감하시겠습니까?');">
+                    onsubmit="return confirm('정말 마감하시겠습니까?\n마감 이후에는 수정 및 삭제가 불가능합니다.');">
                     <button type="submit" class="btn btn-finish"">경기 마감하기</button>
                 </form>
+                <% } %>
             </div>
             <div class=" applicant">
                         <table class="table text-center">

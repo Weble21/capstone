@@ -69,4 +69,11 @@ router.delete("/:id", async (req, res) => {
   res.redirect("/mypage");
 });
 
+router.get("/:id/value", async (req, res) => {
+  const { id } = req.params;
+  const product = await Product.findById(id);
+
+  res.render("mypage/value", { product, id });
+});
+
 module.exports = router;

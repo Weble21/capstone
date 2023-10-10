@@ -1,0 +1,53 @@
+<% layout('components/boilerplate.ejs') -%>
+<div class="checkApplicant">
+    <div class="checkHeader">
+        <h2>경기 관리 및 신청자 정보</h2>
+        <% if(!product.application) { %>
+        <form action="/products/<%= product._id %>/application" method="POST"
+            onsubmit="return confirm('정말 마감하시겠습니까?\n마감 이후에는 수정 및 삭제가 불가능합니다.');">
+            <button type="submit" class="btn btn-finish"">경기 마감하기</button>
+        </form>
+        <% } %>
+    </div>
+    <div class=" applicant">
+                <table class="table text-center">
+                    <thead class="align-middle">
+                        <tr>
+                            <th scope="row" class="col-1">유저 이름</th>
+                            <td class="col-6">전화 번호</td>
+                            <td class="col-2">페어 등급</td>
+                            <td class="col-2">추천하기</td>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        <% let idx=0 %>
+                            <% for(let applicant of product.submittedNum) { %>
+                                <tr>
+                                    <th scope="row">
+                                        <%= applicant.username %>
+                                    </th>
+                                    <td>
+                                        <%= applicant.phone_num %>
+                                    </td>
+                                    <td>
+                                        <%= applicant.fair_tier %>
+                                    </td>
+                                    <td>
+                                        <% if(product.application) { %>
+                                        <form action="/products/<%= product._id %>/recommend" method="POST"
+                                            onsubmit="return confirmAndDisable(this, '추천하시겠습니까?');">
+                                            <!-- hidden 필드에 인덱스 값을 저장 -->
+                                            <input type="hidden" name="idx" value="<%= idx %>">
+                                            <button type="submit" class="btn-recommend">추천하기</button>
+                                        </form>
+                                        <% } else { %>
+                                            <button title="마감된 경기만 추천이 가능합니다." type="submit" class="disabledButton" disabled>추천하기</button>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <% idx++ %>
+                            <% } %>
+                    </tbody>
+                </table>
+    </div>
+</div>

@@ -2,7 +2,7 @@
     .btn-danger-to-delete {
         border-radius: 17px;
         background: none;
-        color: #ef233c;
+        color: #ff0a54;
         border: 2px solid;
         padding: 0.3em 1.2em;
         font-size: var(16px);
@@ -11,11 +11,32 @@
 
 
     .btn-danger-to-delete:hover {
-        border-color: #ef233c;
+        border-color: #ff0a54;
         color: white;
-        background-color: #ef233c;
+        background-color: #ff0a54;
         /* offset-x | offset-y | blur-radius | spread-redius | color */
-        box-shadow: 0em 0.3em 0.3em -0.1em #e9142d;
+        box-shadow: 0em 0.3em 0.3em -0.1em #ff0a54;
+        transform: translateY(-0.1em);
+        cursor: pointer;
+    }
+
+    .btn-info-to-value {
+        border-radius: 17px;
+        background: none;
+        color: #4895ef;
+        border: 2px solid;
+        padding: 0.3em 1.2em;
+        font-size: var(16px);
+        transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+    }
+
+
+    .btn-info-to-value:hover {
+        border-color: #4895ef;
+        color: white;
+        background-color: #4895ef;
+        /* offset-x | offset-y | blur-radius | spread-redius | color */
+        box-shadow: 0em 0.3em 0.3em -0.1em #4895ef;
         transform: translateY(-0.1em);
         cursor: pointer;
     }
@@ -105,6 +126,7 @@
                                             <% } %>
             </table>
             <br><br><br>
+
             <h2 class="registedPlay box">마감된 경기🎯</h2>
             <table class="table text-center">
                 <thead class="align-middle">
@@ -148,9 +170,9 @@
                                             <%= product.username %>(<%= product.fair_tier %>)
                                         </td>
                                         <td>
-                                            <form action="/products/<% product._id %>/delete" method="POST" onsubmit="return confirm('신청을 취소하시겠습니까?');">
-                                                <button class="btn btn-info">평가하기</button>
-                                            </form>
+                                            <a href="/mypage/<%= product._id %>/value">
+                                                <button class="btn btn-info-to-value">평가하기</button>
+                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -160,3 +182,5 @@
                                             <% } %>
             </table>
             <br><br>
+
+            

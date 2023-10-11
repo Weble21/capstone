@@ -52,7 +52,7 @@ router.post("/:id/apply", async (req, res) => {
     game.submittedNum.push({ username, phone_num, fair_tier });
     await game.save();
     req.flash("success", "신청이 완료되었습니다!");
-    res.status(200).redirect("/mypage");
+    res.status(200).redirect("/mypage/applied");
   } catch (error) {
     console.error(error);
     req.flash("error", "Error 발생!");
@@ -94,6 +94,34 @@ router.post("/:id/popData", async (req, res) => {
 
     req.flash("success", "신청이 취소되었습니다.");
     res.redirect("/mypage/applied");
+  } catch (error) {
+    console.log(error);
+    req.flash("error", "Error!");
+    res.status(500).redirect("/404");
+  }
+});
+
+router.post("/:id/deletePlayer", async (req, res) => {
+  try {
+    if (!req.isAuthenticated()) {
+      console.log("errr");
+      req.flash("error", "로그인하세요");
+      return res.redirect("/login");
+    }
+    const { id } = req.params;
+    const { username: current_username } = req.user;
+    const game = await Product.findById(id);
+    const idx = parseInt(req.body.idx);
+    console.log(idx);
+    if (current_username === game.username) {
+      game.submittedNum.splice(idx, 1);
+      await game.save();
+      req.flash("success", "신청이 취소되었습니다.");
+      res.redirect("/mypage");
+    } else {
+      req.flash("error", "일치하지 않음!");
+      res.status(500).redirect("/404");
+    }
   } catch (error) {
     console.log(error);
     req.flash("error", "Error!");

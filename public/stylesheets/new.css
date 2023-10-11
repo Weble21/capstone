@@ -252,9 +252,10 @@ label {
 .btn-recommend {
     background-color: #00d30b;
     color: #ffffff;
-    border-radius: 16px;
-    padding: 5px;
+    border-radius: 17px;
+    padding: 0.3em 1.2em;
     border: solid 2px rgb(0, 255, 0);
+    font-size: var(16px);
     transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
 }
 .btn-recommend:hover {
@@ -267,5 +268,24 @@ label {
     cursor: pointer;
 }
 
+.btn-danger-to-delete {
+    border-radius: 17px;
+    background: none;
+    color: #ff0a54;
+    border: 2px solid;
+    padding: 0.3em 1.2em;
+    font-size: var(16px);
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
 
+
+.btn-danger-to-delete:hover {
+    border-color: #ff0a54;
+    color: white;
+    background-color: #ff0a54;
+    /* offset-x | offset-y | blur-radius | spread-redius | color */
+    box-shadow: 0em 0.3em 0.3em -0.1em #ff0a54;
+    transform: translateY(-0.1em);
+    cursor: pointer;
+}
     

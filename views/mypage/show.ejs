@@ -96,10 +96,14 @@
                         <table class="table text-center">
                             <thead class="align-middle">
                                 <tr>
-                                    <th scope="row" class="col-1">유저 이름</th>
-                                    <td class="col-6">전화 번호</td>
+                                    <th scope="row" class="col-2">유저 이름</th>
+                                    <td class="col-4">전화 번호</td>
                                     <td class="col-2">페어 등급</td>
+                                    <% if(product.application) { %>
                                     <td class="col-2">추천하기</td>
+                                    <% } else { %>
+                                    <td class="col-2">삭제하기</td>
+                                    <% } %>
                                 </tr>
                             </thead>
                             <tbody class="align-middle">
@@ -121,10 +125,14 @@
                                                     onsubmit="return confirmAndDisable(this, '추천하시겠습니까?');">
                                                     <!-- hidden 필드에 인덱스 값을 저장 -->
                                                     <input type="hidden" name="idx" value="<%= idx %>">
-                                                    <button type="submit" class="btn-recommend">추천하기</button>
+                                                    <button type="submit" class="btn btn-recommend">추천하기</button>
                                                 </form>
                                                 <% } else { %>
-                                                    <button title="마감된 경기만 추천이 가능합니다." type="submit" class="disabledButton" disabled>추천하기</button>
+                                                    <form action="/products/<%= product._id %>/deletePlayer" method="POST"
+                                                        onsubmit="return confirm('신청자의 정보를 삭제하시겠습니까?\n※상대방에게는 표시되지 않습니다※');">
+                                                        <input type="hidden" name="idx" value="<%= idx %>">
+                                                        <button type="submit" class="btn btn-danger-to-delete">삭제하기</button>
+                                                    </form>
                                                 <% } %>
                                             </td>
                                         </tr>

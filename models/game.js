@@ -42,6 +42,17 @@ const productSchema = new Schema({
     type: [{ username: String, phone_num: String, fair_tier: Number }],
     default: [],
   },
+  recommended: {
+    type: [
+      {
+        username: String,
+        phone_num: String,
+        toRecommend_name: String,
+        toRecommend_num: String,
+      },
+    ],
+    default: [],
+  },
 });
 productSchema.pre("save", function (next) {
   if (this.time && typeof this.time === "string") {

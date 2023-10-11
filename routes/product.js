@@ -60,63 +60,6 @@ router.post("/:id/apply", async (req, res) => {
   }
 });
 
-router.post("/:id/recommend", async (req, res) => {
-  try {
-    if (!req.isAuthenticated()) {
-      console.log("errr");
-      req.flash("error", "로그인하세요");
-      return res.redirect("/");
-    }
-
-    const { id } = req.params; // 폼에서 제출된 게임의 id.
-    const game = await Product.findById(id);
-    const { username: current_username, phone_num: current_phone_num } =
-      req.user;
-    const idx = parseInt(req.body.idx);
-
-    if (game === null) {
-      req.flash("error", "해당 경기를 찾을 수 없습니다!");
-      return res.status(404).redirect("/");
-    }
-
-    //game.submittedNum는 배열이기에 [idx]으로 배열에 접근
-    if (
-      current_username === game.submittedNum[idx].username &&
-      current_phone_num === game.submittedNum[idx].phone_num
-    ) {
-      req.flash("error", "자기자신은 추천할 수 없습니다");
-      return res.status(400).redirect("/mypage");
-    } else {
-      //추천받은 유저의 fair_tier +1;
-      const nameToFind = game.submittedNum[idx].name;
-      const phoneNumToFind = game.submittedNum[idx].phone_num;
-      try {
-        const userToUp = await User.findOne({
-          name: nameToFind,
-          phone_num: phoneNumToFind,
-        });
-        if (!userToUp) {
-          req.flash("error", "추천한 사용자가 존재하지 않습니다");
-          return res.status(404).redirect("/404");
-        }
-        userToUp.fair_tier += 1;
-        await userToUp.save();
-        req.flash("success", "추천이 완료되었습니다👍");
-        // console.log(userToUp.fair_tier);
-      } catch (err) {
-        console.log("Update error!", err);
-        req.flash("error", "업데이트 중 오류가 발생하였습니다.");
-      }
-    }
-
-    res.status(200).redirect("/mypage");
-  } catch (error) {
-    console.error(error);
-    req.flash("error", "오류가 발생했습니다!");
-    res.status(500).redirect("/");
-  }
-});
-
 router.post("/:id/popData", async (req, res) => {
   try {
     if (!req.isAuthenticated()) {
@@ -155,6 +98,85 @@ router.post("/:id/popData", async (req, res) => {
     console.log(error);
     req.flash("error", "Error!");
     res.status(500).redirect("/404");
+  }
+});
+
+router.post("/:id/recommend", async (req, res) => {
+  try {
+    if (!req.isAuthenticated()) {
+      console.log("errr");
+      req.flash("error", "로그인하세요");
+      return res.redirect("/");
+    }
+
+    const { id } = req.params; // 폼에서 제출된 게임의 id.
+    const game = await Product.findById(id);
+    const { username: current_username, phone_num: current_phone_num } =
+      req.user;
+    const idx = parseInt(req.body.idx);
+
+    if (game === null) {
+      req.flash("error", "해당 경기를 찾을 수 없습니다!");
+      return res.status(404).redirect("/");
+    }
+
+    //game.submittedNum는 배열이기에 [idx]으로 배열에 접근
+    if (
+      current_username === game.submittedNum[idx].username &&
+      current_phone_num === game.submittedNum[idx].phone_num
+    ) {
+      req.flash("error", "자기자신은 추천할 수 없습니다");
+      return res.status(400).redirect("/mypage");
+    } else {
+      //추천받은 유저의 fair_tier +1;
+      const nameToFind = game.submittedNum[idx].username;
+      const phoneNumToFind = game.submittedNum[idx].phone_num;
+      try {
+        const userToUp = await User.findOne({
+          username: nameToFind,
+          phone_num: phoneNumToFind,
+        });
+
+        const duplicated = await Product.findOne({
+          "recommended.username": current_username,
+          "recommended.phone_num": current_phone_num,
+          "recommended.toRecommend_name": nameToFind,
+          "recommended.toRecommend_num": phoneNumToFind,
+        });
+        //console.log(duplicated);
+
+        if (!userToUp) {
+          req.flash("error", "추천한 사용자가 존재하지 않습니다");
+          return res.status(404).redirect("/404");
+        }
+        if (duplicated) {
+          req.flash("error", "중복 추천은 불가능합니다");
+          return res.status(404).redirect("/404");
+        }
+
+        userToUp.fair_tier += 1;
+        game.recommended.push({
+          username: current_username,
+          phone_num: current_phone_num,
+          toRecommend_name: nameToFind,
+          toRecommend_num: phoneNumToFind,
+        });
+        await game.save();
+        await userToUp.save();
+        req.flash("success", "추천이 완료되었습니다👍");
+
+        // console.log(userToUp.fair_tier);
+      } catch (err) {
+        console.log("Update error!", err);
+        req.flash("error", "업데이트 중 오류가 발생하였습니다.");
+      }
+    }
+
+    res.status(200).redirect("/mypage");
+  } catch (error) {
+    console.error(error);
+    req.flash("error", "오류가 발생했습니다!");
+    res.status(500).redirect("/");
   }
 });
 

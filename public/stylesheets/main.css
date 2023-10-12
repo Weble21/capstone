@@ -9,6 +9,10 @@
     margin: 0;
 }
 
+body{
+    overflow-x: hidden;
+}
+
 .header {
     border-bottom: solid 2px #2b2d42;
 }

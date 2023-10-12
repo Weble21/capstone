@@ -1,10 +1,59 @@
 <% layout('components/boilerplate.ejs') -%>
-<link rel="stylesheet" href="/stylesheets/value.css">
-<div class="">
-    <div class="players">
-        <h2>신청자 정보</h2>
-    </div>
-    <div class="">
+    <link rel="stylesheet" href="/stylesheets/value.css">
+    <div class="allDiv">
+        <div class="gameDiv">
+            <h2 class="game box">경기 정보 🔍</h2>
+            <Br>
+            <table class="table text-center">
+                <thead class="align-middle">
+                    <tr>
+                        <th scope="row" class="col-1">종목</th>
+                        <td class="col-2">시간</td>
+                        <td class="col-1">지역</td>
+                        <td class="col-4">내용</td>
+                        <td class="col-1">경기 티어</td>
+                        <td class="col-1">작성자</td>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    <tr>
+                        <th scope="row">
+                            <% switch (product.sport) { case 'basketball' : %> 농구 <% break; %>
+                                    <% case 'baseball' : %> 야구 <% break; %>
+                                            <% case 'soccer' : %> 축구 <% break; %>
+                                                    <% case 'futsal' : %> 풋살 <% break; %>
+                                                            <% default: %> 기타 <% break; %>
+                                                                    <% } %>
+                        </th>
+                        <td>
+                            <%=product.formattedDay%>
+                                <div>
+                                    <%=product.formattedTime%>
+                                </div>
+                        </td>
+                        <td>
+                            <%=product.area%>
+                        </td>
+                        <td>
+                            <%=product.contents%>
+                        </td>
+                        <td>
+                            <%= product.tier.charAt(0).toUpperCase() + product.tier.slice(1) %>
+                        </td>
+                        <td>
+                            <%=product.username%>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br><br>
+        <div class="playerDiv">
+            <div>
+                <h2 class="player box">신청자 정보 📋</h2>
+                <br>
+            </div>
+            <div class="">
                 <table class="table text-center">
                     <thead class="align-middle">
                         <tr>
@@ -29,20 +78,23 @@
                                     </td>
                                     <td>
                                         <% if(product.application) { %>
-                                        <form action="/products/<%= product._id %>/recommend" method="POST"
-                                            onsubmit="return confirmAndDisable(this, '추천하시겠습니까?');">
-                                            <!-- hidden 필드에 인덱스 값을 저장 -->
-                                            <input type="hidden" name="idx" value="<%= idx %>">
-                                            <button type="submit" class="btn-recommend">추천하기</button>
-                                        </form>
-                                        <% } else { %>
-                                            <button title="마감된 경기만 추천이 가능합니다." type="submit" class="disabledButton" disabled>추천하기</button>
-                                        <% } %>
+                                            <form action="/products/<%= product._id %>/recommend" method="POST"
+                                                onsubmit="return confirmAndDisable(this, '추천하시겠습니까?');">
+                                                <!-- hidden 필드에 인덱스 값을 저장 -->
+                                                <input type="hidden" name="idx" value="<%= idx %>">
+                                                <button type="submit" class="btn btn-recommend">추천하기</button>
+                                            </form>
+                                            <% } else { %>
+                                                <button title="마감된 경기만 추천이 가능합니다." type="submit" class="disabledButton"
+                                                    disabled>추천하기</button>
+                                                <% } %>
                                     </td>
                                 </tr>
                                 <% idx++ %>
-                            <% } %>
+                                    <% } %>
                     </tbody>
                 </table>
+            </div>
+        </div>
     </div>
-</div>
+    <br><br><br>

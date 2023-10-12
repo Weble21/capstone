@@ -1,0 +1,60 @@
+.btn-recommend {
+    background-color: #fdc921;
+    color: #fffbfa;
+    border-radius: 17px;
+    border: solid #fdc921 1px;
+    box-shadow: 1.5px 1.5px 1.5px rgb(220, 213, 1);
+    transition: color 0.15s, border-color 0.15s, box-shadow 0.25s, transform 0.15s;
+}
+.btn-recommend:hover {
+    background-color: #f9c107;
+    color: #fbfbfb;
+    border-radius: 17px;
+    margin-left: 2px;
+    margin-top: 2px;
+    box-shadow: none;
+    transform: translateY(0.05em);
+    cursor: pointer;
+}
+
+.btn-recommend:focus {
+    background-color: #f9c107;
+    color: #fffbfa;
+    border-radius: 17px;
+    box-shadow: 0em -0.2em -0.2em 0.1em #f9c107;
+    transform: translateY(0.05em);
+    cursor: pointer;
+}
+
+.allDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.box {
+    display: flex;
+    flex-direction: row;   
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.gameDiv {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: 25vh;
+}
+
+.game {
+    font-weight: 800;
+}
+
+.playerDiv {
+    display: block;
+    margin-bottom: 40px;
+}
+
+.player {
+    font-weight: 800;
+}

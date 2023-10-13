@@ -154,7 +154,7 @@ router.post("/:id/recommend", async (req, res) => {
       current_phone_num === game.submittedNum[idx].phone_num
     ) {
       req.flash("error", "자기자신은 추천할 수 없습니다");
-      return res.status(400).redirect("/mypage");
+      return res.status(400).redirect("/mypage/applied");
     } else {
       //추천받은 유저의 fair_tier +1;
       const nameToFind = game.submittedNum[idx].username;
@@ -179,7 +179,7 @@ router.post("/:id/recommend", async (req, res) => {
         }
         if (duplicated) {
           req.flash("error", "중복 추천은 불가능합니다");
-          return res.status(404).redirect("/404");
+          return res.redirect("/mypage");
         }
 
         userToUp.fair_tier += 1;
@@ -199,7 +199,6 @@ router.post("/:id/recommend", async (req, res) => {
         req.flash("error", "업데이트 중 오류가 발생하였습니다.");
       }
     }
-
     res.status(200).redirect("/mypage");
   } catch (error) {
     console.error(error);

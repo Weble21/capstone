@@ -4,27 +4,27 @@
         <div class="gameDiv">
             <h2 class="game box">경기 정보 🔍</h2>
             <Br>
-            <table class="table text-center">
-                <thead class="align-middle">
+            <table class="table text-center table_explain">
+                <thead class="align-middle" id="explainHead">
                     <tr>
                         <th scope="row" class="col-1">종목</th>
-                        <td class="col-2">시간</td>
-                        <td class="col-1">지역</td>
-                        <td class="col-4">내용</td>
-                        <td class="col-1">경기 티어</td>
-                        <td class="col-1">작성자</td>
+                        <td class="col-2" id="explain_2">시간</td>
+                        <td class="col-1" id="explain_3">지역</td>
+                        <td class="col-4" id="explain_4">내용</td>
+                        <td class="col-1" id="explain_5">경기 티어</td>
+                        <td class="col-1" id="explain_6">작성자</td>
                     </tr>
                 </thead>
-                <tbody class="align-middle">
+                <tbody class="align-middle" id="explainBody">
                     <tr>
-                        <th scope="row">
+                        <td scope="row">
                             <% switch (product.sport) { case 'basketball' : %> 농구 <% break; %>
                                     <% case 'baseball' : %> 야구 <% break; %>
                                             <% case 'soccer' : %> 축구 <% break; %>
                                                     <% case 'futsal' : %> 풋살 <% break; %>
                                                             <% default: %> 기타 <% break; %>
                                                                     <% } %>
-                        </th>
+                        </td>
                         <td>
                             <%=product.formattedDay%>
                                 <div>
@@ -97,9 +97,9 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="backBtn">
         <a href="/mypage">
-        <button class="btn btn-success">
+        <button class="btn btn-outline-secondary">
             마이페이지로 돌아가기
         </button>
         </a>
